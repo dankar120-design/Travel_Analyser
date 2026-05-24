@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseanalysatorn ✈️ - Skellefteå-fynd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #4f46e5;
+            --primary-glow: rgba(79, 70, 229, 0.4);
+            --accent: #06b6d4;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 118, 212, 0.15) 0px, transparent 50%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 2.5rem;
+        }
+
+        .brand h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #a5b4fc, #818cf8, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand p {
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .timestamp {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+        }
+
+        /* Filter bar */
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* Flight Grid */
+        .flight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Flight Card */
+        .flight-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flight-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.1);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .route-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-right: 4rem; /* Undvik krock med badge */
+        }
+
+        .route-code {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .route-arrow {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+
+        .destination-name {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .price-section {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .price-val {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+
+        .price-currency {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .flight-details {
+            border-top: 1px solid var(--card-border);
+            padding-top: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-label {
+            color: var(--text-muted);
+        }
+
+        .detail-val {
+            font-weight: 600;
+        }
+
+        .baggage-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+        }
+
+        .baggage-badge.no {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .baggage-badge.yes {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .book-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            color: #fff;
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .book-btn:hover {
+            background: linear-gradient(135deg, #5a52ff, #4f87ff);
+            box-shadow: 0 6px 18px var(--primary-glow);
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border: 1px dashed var(--card-border);
+            border-radius: 16px;
+            color: var(--text-muted);
+        }
+
+        /* System Status Banner */
+        .system-status-banner {
+            background: rgba(245, 158, 11, 0.06);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--warning);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+            flex-shrink: 0;
+            animation: pulse-warn 2s infinite;
+        }
+
+        .status-text {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .status-text strong {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        @keyframes pulse-warn {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+            }
+        }
+
+        @keyframes pulse-success {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <h1>Reseanalysatorn ✈️</h1>
+                <p>Daglig prissökningsbevakning optimerad för Skellefteå-bor</p>
+            </div>
+            <div class="timestamp">
+                Uppdaterad: 2026-05-24 18:18
+            </div>
+        </header>
+
+        <!-- System Status Banner -->
+        <div class="system-status-banner" style="background: rgba(16, 185, 129, 0.06); border-color: rgba(16, 185, 129, 0.15);">
+            <span class="status-dot" style="background-color: var(--success); box-shadow: 0 0 10px rgba(16, 185, 129, 0.6); animation: pulse-success 2s infinite;"></span>
+            <div class="status-text">
+                <strong>System Status:</strong> Aktiv & Framtidssäkrad (Travelpayouts API). Skanning rullar dagligen med full täckning och livslängd!
+            </div>
+        </div>
+
+        <section class="filter-section">
+            <div class="filter-title">Filtrera på avreseort:</div>
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterOrigin('ALL')">Alla avreseorter</button>
+                <button class="filter-btn" onclick="filterOrigin('SFT')">Skellefteå (SFT)</button>
+                <button class="filter-btn" onclick="filterOrigin('UME')">Umeå (UME)</button>
+                <button class="filter-btn" onclick="filterOrigin('LLA')">Luleå (LLA)</button>
+                <button class="filter-btn" onclick="filterOrigin('ARN')">Arlanda (ARN)</button>
+            </div>
+        </section>
+
+        <main class="flight-grid" id="flightGrid">
+            <!-- Flygkort injectas via JavaScript -->
+        </main>
+    </div>
+
+    <script>
+        const flights = [{"origin": "ARN", "destination": "PMI", "destination_name": "Mallorca", "price": 1380.0, "type": "weekend", "departure_date": "2026-06-08", "departure_time": "--:--", "arrival_time": "--:--", "return_date": "2026-06-08", "return_time": "--:--", "return_arrival_time": "--:--", "outbound_stops": 1, "inbound_stops": 1, "carrier": "Flightnetwork", "baggage_included": false, "deep_link": "https://www.skyscanner.se/transport/flights/arn/pmi/2026-06-08/2026-06-08?adults=1"}, {"origin": "ARN", "destination": "LON", "destination_name": "London", "price": 950.0, "type": "weekend", "departure_date": "2026-06-09", "departure_time": "--:--", "arrival_time": "--:--", "return_date": "2026-06-09", "return_time": "--:--", "return_arrival_time": "--:--", "outbound_stops": 1, "inbound_stops": 1, "carrier": "Mytrip.com", "baggage_included": false, "deep_link": "https://www.skyscanner.se/transport/flights/arn/lon/2026-06-09/2026-06-09?adults=1"}, {"origin": "ARN", "destination": "LON", "destination_name": "London", "price": 1202.0, "type": "weekend", "departure_date": "2026-06-10", "departure_time": "--:--", "arrival_time": "--:--", "return_date": "2026-06-10", "return_time": "--:--", "return_arrival_time": "--:--", "outbound_stops": 1, "inbound_stops": 1, "carrier": "Flightnetwork", "baggage_included": false, "deep_link": "https://www.skyscanner.se/transport/flights/arn/lon/2026-06-10/2026-06-10?adults=1"}, {"origin": "ARN", "destination": "LON", "destination_name": "London", "price": 1391.0, "type": "weekend", "departure_date": "2026-05-27", "departure_time": "--:--", "arrival_time": "--:--", "return_date": "2026-05-27", "return_time": "--:--", "return_arrival_time": "--:--", "outbound_stops": 1, "inbound_stops": 1, "carrier": "Mytrip.com", "baggage_included": false, "deep_link": "https://www.skyscanner.se/transport/flights/arn/lon/2026-05-27/2026-05-27?adults=1"}];
+        let activeOrigin = 'ALL';
+
+        function renderFlights() {
+            const grid = document.getElementById('flightGrid');
+            grid.innerHTML = '';
+            
+            const filtered = flights.filter(f => activeOrigin === 'ALL' || f.origin === activeOrigin);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <h2>Inga resor hittades under gränsvärdena för detta filter just nu.</h2>
+                        <p>Bevakningen fortsätter dagligen för att hitta nya prissänkningar!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sortera efter pris (billigast först)
+            filtered.sort((a, b) => a.price - b.price);
+
+            filtered.forEach(f => {
+                const card = document.createElement('div');
+                card.className = 'flight-card';
+                
+                const isSFT = f.origin === 'SFT' ? '⚡ Direkt/Snabbast' : 'Bil/Transfer';
+                const bagText = f.baggage_included ? '🎒 Incheckat bagage ingår' : '⚠️ Endast handbagage';
+                const bagClass = f.baggage_included ? 'yes' : 'no';
+                
+                card.innerHTML = `
+                    <span class="card-badge">${isSFT}</span>
+                    <div>
+                        <div class="route-info">
+                            <div>
+                                <div class="route-code">${f.origin}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Utresa</div>
+                            </div>
+                            <div class="route-arrow">➔</div>
+                            <div>
+                                <div class="route-code">${f.destination}</div>
+                                <div class="destination-name">${f.destination_name}</div>
+                            </div>
+                        </div>
+
+                        <div class="price-section">
+                            <span class="price-val">${Math.round(f.price).toLocaleString('sv-SE')}</span>
+                            <span class="price-currency">SEK</span>
+                        </div>
+
+                        <div class="flight-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Utresa:</span>
+                                <span class="detail-val">${f.departure_date} (${f.departure_time})</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Hemresa:</span>
+                                <span class="detail-val">${f.return_date} (${f.return_time})</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Byten (Ut/Hem):</span>
+                                <span class="detail-val">${f.outbound_stops} / ${f.inbound_stops}</span>
+                            </div>
+                            <span class="baggage-badge ${bagClass}">${bagText}</span>
+                        </div>
+                    </div>
+                    <a href="${f.deep_link}" target="_blank" class="book-btn">Sök på Skyscanner</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterOrigin(origin) {
+            activeOrigin = origin;
+            
+            // Uppdatera knappar
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.textContent.includes(origin) || (origin === 'ALL' && btn.textContent.includes('Alla'))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            renderFlights();
+        }
+
+        // Initial rendering
+        renderFlights();
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+name: Travel Analyser
+
+on:
+  schedule:
+    # Kör varje morgon kl 08:00 UTC (09:00 eller 10:00 svensk tid)
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    # Tillåter manuell körning från GitHub UI
+
+permissions:
+  contents: write  # Krävs för att committa state och deploya gh-pages
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Hämta hela historiken för att kunna committa säkert
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Travel Analyser
+        env:
+          AMADEUS_CLIENT_ID: ${{ secrets.AMADEUS_CLIENT_ID }}
+          AMADEUS_CLIENT_SECRET: ${{ secrets.AMADEUS_CLIENT_SECRET }}
+          AMADEUS_ENV: 'test' # Ändra till 'production' när du går över till skarpa priser
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python main.py
+
+      - name: Commit and Push Price History (State)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/price_history.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: uppdatera resehistorik [skip ci]" && git push)
+
+      - name: Deploy Dashboard to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
+          target-folder: .
+          clean: false # Rensa inte andra filer i gh-pages
