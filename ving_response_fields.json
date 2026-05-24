@@ -1,0 +1,52 @@
+{
+  "errors": [
+    {
+      "message": "Cannot query field \"name\" on type \"Hotel\".",
+      "locations": [
+        {
+          "line": 18,
+          "column": 11
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    },
+    {
+      "message": "Cannot query field \"stars\" on type \"Hotel\".",
+      "locations": [
+        {
+          "line": 19,
+          "column": 11
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    },
+    {
+      "message": "Cannot query field \"rating\" on type \"Hotel\".",
+      "locations": [
+        {
+          "line": 20,
+          "column": 11
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    },
+    {
+      "message": "Cannot query field \"hotel\" on type \"HotelContent\".",
+      "locations": [
+        {
+          "line": 23,
+          "column": 13
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    }
+  ]
+}

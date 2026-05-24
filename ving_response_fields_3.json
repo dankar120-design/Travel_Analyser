@@ -1,0 +1,606 @@
+{
+  "data": {
+    "lmsTrips": {
+      "edges": [
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-25"
+            },
+            "duration": 15,
+            "destinationCode": "LCA",
+            "departureCode": "LLA",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Anonymous Beach Hotel",
+                "geographical": {
+                  "country": {
+                    "name": "Cypern"
+                  },
+                  "resort": {
+                    "name": "Ayia Napa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-25"
+            },
+            "duration": 8,
+            "destinationCode": "LCA",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Senator",
+                "geographical": {
+                  "country": {
+                    "name": "Cypern"
+                  },
+                  "resort": {
+                    "name": "Ayia Napa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-25"
+            },
+            "duration": 12,
+            "destinationCode": "LCA",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Senator",
+                "geographical": {
+                  "country": {
+                    "name": "Cypern"
+                  },
+                  "resort": {
+                    "name": "Ayia Napa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-25"
+            },
+            "duration": 5,
+            "destinationCode": "LCA",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Senator",
+                "geographical": {
+                  "country": {
+                    "name": "Cypern"
+                  },
+                  "resort": {
+                    "name": "Ayia Napa"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-26"
+            },
+            "duration": 8,
+            "destinationCode": "PMI",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 3920,
+                "type": "specified",
+                "hotelCode": "DELA"
+              },
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "BQ Delfín Azul",
+                "geographical": {
+                  "country": {
+                    "name": "Spanien"
+                  },
+                  "resort": {
+                    "name": "Alcudia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-26"
+            },
+            "duration": 15,
+            "destinationCode": "PMI",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": null,
+                "geographical": null
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-27"
+            },
+            "duration": 8,
+            "destinationCode": "LPA",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 3295,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": null,
+                "geographical": null
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-27"
+            },
+            "duration": 8,
+            "destinationCode": "RHO",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 2565,
+                "type": "specified",
+                "hotelCode": "DIMI"
+              },
+              {
+                "price": 1195,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": null,
+                "geographical": null
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-28"
+            },
+            "duration": 15,
+            "destinationCode": "CHQ",
+            "departureCode": "LLA",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "The City Hotel & Suites",
+                "geographical": {
+                  "country": {
+                    "name": "Grekland"
+                  },
+                  "resort": {
+                    "name": "Rethymnon"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-28"
+            },
+            "duration": 8,
+            "destinationCode": "HER",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 1960,
+                "type": "specified",
+                "hotelCode": "ELIN"
+              },
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Elina Apartments",
+                "geographical": {
+                  "country": {
+                    "name": "Grekland"
+                  },
+                  "resort": {
+                    "name": "Hersonissos, Stalis & Malia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 8,
+            "destinationCode": "LCA",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 3015,
+                "type": "specified",
+                "hotelCode": "PAVL"
+              },
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": null,
+                "geographical": null
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 15,
+            "destinationCode": "LCA",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 4880,
+                "type": "specified",
+                "hotelCode": "PAVL"
+              },
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": null,
+                "geographical": null
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 8,
+            "destinationCode": "SPU",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 3970,
+                "type": "specified",
+                "hotelCode": "TONA"
+              },
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Apartmani Tona",
+                "geographical": {
+                  "country": {
+                    "name": "Kroatien"
+                  },
+                  "resort": {
+                    "name": "Baska Voda"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 15,
+            "destinationCode": "SPU",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Apartmani Tona",
+                "geographical": {
+                  "country": {
+                    "name": "Kroatien"
+                  },
+                  "resort": {
+                    "name": "Baska Voda"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 8,
+            "destinationCode": "PMI",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 4675,
+                "type": "specified",
+                "hotelCode": "DELA"
+              },
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "BQ Delfín Azul",
+                "geographical": {
+                  "country": {
+                    "name": "Spanien"
+                  },
+                  "resort": {
+                    "name": "Alcudia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 15,
+            "destinationCode": "KGS",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 4375,
+                "type": "specified",
+                "hotelCode": "KATE"
+              },
+              {
+                "price": 2595,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Katerina Apartments",
+                "geographical": {
+                  "country": {
+                    "name": "Grekland"
+                  },
+                  "resort": {
+                    "name": "Pothia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 11,
+            "destinationCode": "LCA",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": null,
+                "geographical": null
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 8,
+            "destinationCode": "KGS",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 4995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Katerina Apartments",
+                "geographical": {
+                  "country": {
+                    "name": "Grekland"
+                  },
+                  "resort": {
+                    "name": "Pothia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 15,
+            "destinationCode": "PMI",
+            "departureCode": "ARN",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "VIVA Sunrise",
+                "geographical": {
+                  "country": {
+                    "name": "Spanien"
+                  },
+                  "resort": {
+                    "name": "Alcudia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "date": {
+              "short": "2026-05-29"
+            },
+            "duration": 8,
+            "destinationCode": "CHQ",
+            "departureCode": "SFT",
+            "offers": [
+              {
+                "price": 995,
+                "type": "flightOnly",
+                "hotelCode": "FLYA"
+              }
+            ],
+            "hotel": {
+              "content": {
+                "name": "Porto Platanias Village",
+                "geographical": {
+                  "country": {
+                    "name": "Grekland"
+                  },
+                  "resort": {
+                    "name": "Chaniakusten, Platanias"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

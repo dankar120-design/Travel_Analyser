@@ -1,0 +1,28 @@
+{
+  "errors": [
+    {
+      "message": "Cannot query field \"stars\" on type \"HotelContent\". [Suggestion hidden]",
+      "locations": [
+        {
+          "line": 20,
+          "column": 13
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    },
+    {
+      "message": "Cannot query field \"rating\" on type \"HotelContent\". [Suggestion hidden]",
+      "locations": [
+        {
+          "line": 21,
+          "column": 13
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    }
+  ]
+}
