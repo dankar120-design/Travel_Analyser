@@ -3368,7 +3368,7 @@
           "price": 4275.0,
           "departure_date": "2026-05-30",
           "return_date": "2026-06-03",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PMI&SelectedDepCd=ARN&QueryDepDate=20260530&QueryDur=4&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=FELI&QueryResID=313&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=61&price=4275",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260530&QueryDur=4&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=FELI&QueryResID=313&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Feliz",
@@ -3602,7 +3602,7 @@
           "price": 3620.0,
           "departure_date": "2026-06-05",
           "return_date": "2026-06-13",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PMI&SelectedDepCd=ARN&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CARA&QueryResID=284&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=51&price=3620",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CARA&QueryResID=284&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Hostal Caravel-la",
@@ -3764,7 +3764,7 @@
           "price": 2510.0,
           "departure_date": "2026-06-06",
           "return_date": "2026-06-14",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=2510",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "The S Apart",
@@ -3854,7 +3854,7 @@
           "price": 3720.0,
           "departure_date": "2026-06-07",
           "return_date": "2026-06-15",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=JSI&SelectedDepCd=ARN&QueryDepDate=20260607&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=BILL&QueryResID=108262&QueryCtryID=32&QueryAreaID=145&QueryDepID=2788&SelectedSerNo=71&price=3720",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=JSI&QueryDepDate=20260607&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=BILL&QueryResID=108262&QueryCtryID=32&QueryAreaID=145&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Billy's House",
@@ -4016,7 +4016,7 @@
           "price": 4880.0,
           "departure_date": "2026-06-13",
           "return_date": "2026-06-21",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PVK&SelectedDepCd=ARN&QueryDepDate=20260613&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SOKO&QueryResID=248&QueryCtryID=32&QueryAreaID=119&QueryDepID=2788&SelectedSerNo=61&price=4880",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PVK&QueryDepDate=20260613&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SOKO&QueryResID=248&QueryCtryID=32&QueryAreaID=119&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Sophies & Kostas Studios",
@@ -5384,7 +5384,7 @@
           "price": 2110.0,
           "departure_date": "2026-05-30",
           "return_date": "2026-06-07",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=2110",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "The S Apart",
@@ -6360,6 +6360,42 @@
           "flight_data": null,
           "package_data": {
             "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Ayia Napa (Cypern)",
+          "price": 3115.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAUM&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Paul Marie Hotel Apartments",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Can Picafort (Spanien)",
+          "price": 4525.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CAPF&QueryResID=262&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "BQ Can Picafort",
             "stars": null,
             "nights": 8,
             "operator": "Ving"
