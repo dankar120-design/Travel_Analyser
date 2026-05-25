@@ -450,8 +450,8 @@ def scrape_tui_lastminute():
             if not destination_code:
                 destination_code = offer.get("hotel", {}).get("geo", {}).get("destinationCode")
             
-            resort_name = offer.get("hotel", {}).get("geo", {}).get("resort", "Okänt resmål")
-            country_name = offer.get("hotel", {}).get("geo", {}).get("country", "Okänt land")
+            resort_name = offer.get("hotel", {}).get("geo", {}).get("resort") or "Okänt resmål"
+            country_name = offer.get("hotel", {}).get("geo", {}).get("country") or "Okänt land"
             
             # Om IATA-kod saknas eller är en intern TUI G-kod, använd resort_name som destination
             display_destination = destination_code
@@ -576,7 +576,11 @@ def compute_deal_factor(item, history):
             if h_item["type"] == item["type"] and h_item["origin"] == item["origin"] and h_item["destination"] == item["destination"]:
                 # För paketresor, matcha även antal nätter så vi inte jämför 7 nätter mot 14 nätter
                 if item["type"] == "package":
-                    if h_item.get("package_data", {}).get("nights") != item.get("package_data", {}).get("nights"):
+                    h_nights = h_item.get("package_data", {}).get("nights")
+                    i_nights = item.get("package_data", {}).get("nights")
+                    h_hotel = h_item.get("package_data", {}).get("hotel_name")
+                    i_hotel = item.get("package_data", {}).get("hotel_name")
+                    if h_nights != i_nights or h_hotel != i_hotel:
                         continue
                 route_prices.append(float(h_item["price"]))
                 
@@ -588,7 +592,7 @@ def compute_deal_factor(item, history):
         if price <= min_hist:
             tags.append("Lägsta pris på 30 dagar!")
         # Nivå 2: Prissänkning ≥15% mot senaste
-        elif last_hist >= price * 1.15:
+        if last_hist >= price * 1.15:
             pct = int((1 - price / last_hist) * 100)
             tags.append(f"Ned {pct}% sedan senast!")
             
