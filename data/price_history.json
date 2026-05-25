@@ -1937,7 +1937,7 @@
           "price": 3770.0,
           "departure_date": "2026-05-30",
           "return_date": "2026-06-07",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PVK&SelectedDepCd=ARN&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=VIVA&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61&price=3770",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PVK&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=VIVA&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Vive Mare",
@@ -4043,7 +4043,7 @@
           "price": 4325.0,
           "departure_date": "2026-06-04",
           "return_date": "2026-06-12",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=HER&SelectedDepCd=ARN&QueryDepDate=20260604&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ILIS&QueryResID=221&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=41&price=4325",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=HER&QueryDepDate=20260604&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ILIS&QueryResID=221&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=41",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Ilissos Apartments",
