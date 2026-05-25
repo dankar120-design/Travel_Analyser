@@ -516,6 +516,10 @@ def update_state(new_flights, new_packages=None):
                             pass
                     item["deep_link"] = link
 
+            # Städa Ving-länkar i befintliga paketresor om de pekar på den gamla 403-upsell routen
+            if item.get("type") == "package" and "deep_link" in item and "resor/bokningssteg/upsell" in item["deep_link"]:
+                item["deep_link"] = item["deep_link"].replace("resor/bokningssteg/upsell", "sista-minuten").replace("QueryRoomAges=42,42", "QueryRoomAges=42")
+
             migrated_items.append(item)
         run["flights"] = migrated_items
 
