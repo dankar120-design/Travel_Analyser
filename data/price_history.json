@@ -5374,6 +5374,60 @@
             "nights": 7,
             "operator": "TUI"
           }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "AYT",
+          "destination_name": "Alanya (Turkiet)",
+          "price": 2110.0,
+          "departure_date": "2026-05-30",
+          "return_date": "2026-06-07",
+          "deep_link": "https://www.ving.se/resor/bokningssteg/upsell?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42,42&QueryUnits=1&SelectedHotCd=THES&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=2110",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "The S Apart",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LPA",
+          "destination_name": "Playa del Inglés (Spanien)",
+          "price": 3520.0,
+          "departure_date": "2026-06-03",
+          "return_date": "2026-06-11",
+          "deep_link": "https://www.ving.se/resor/bokningssteg/upsell?SelectedDestCd=LPA&SelectedDepCd=ARN&QueryDepDate=20260603&QueryDur=8&QueryRoomAges=42,42&QueryUnits=1&SelectedHotCd=SUPR&QueryResID=227&QueryCtryID=65&QueryAreaID=108&QueryDepID=2788&SelectedSerNo=31&price=3520",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunprime Atlantic View",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "HER",
+          "destination_name": "Hersonissos, Stalis & Malia (Grekland)",
+          "price": 4325.0,
+          "departure_date": "2026-06-04",
+          "return_date": "2026-06-12",
+          "deep_link": "https://www.ving.se/resor/bokningssteg/upsell?SelectedDestCd=HER&SelectedDepCd=ARN&QueryDepDate=20260604&QueryDur=8&QueryRoomAges=42,42&QueryUnits=1&SelectedHotCd=ILIS&QueryResID=221&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=41&price=4325",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Ilissos Apartments",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
         }
       ]
     }
