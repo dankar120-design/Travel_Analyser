@@ -5986,6 +5986,60 @@
             "nights": 8,
             "operator": "Ving"
           }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 2615.0,
+          "departure_date": "2026-05-31",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DIMI&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "UME",
+          "destination": "RHO",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 2965.0,
+          "departure_date": "2026-05-31",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=UME&SelectedDestCd=RHO&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DIMI&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2793&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LPA",
+          "destination_name": "San Agustin (Spanien)",
+          "price": 3820.0,
+          "departure_date": "2026-06-10",
+          "return_date": "2026-06-18",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LPA&QueryDepDate=20260610&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=NORC&QueryResID=302&QueryCtryID=65&QueryAreaID=108&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Norcopia",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
         }
       ]
     }
