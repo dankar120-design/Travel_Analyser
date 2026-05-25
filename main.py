@@ -667,6 +667,17 @@ def update_state(new_flights, new_packages=None):
             if item.get("type") == "package" and "deep_link" in item and "resor/bokningssteg/upsell" in item["deep_link"]:
                 item["deep_link"] = item["deep_link"].replace("resor/bokningssteg/upsell", "sista-minuten").replace("QueryRoomAges=42,42", "QueryRoomAges=42")
 
+            # Sanera gamla interna TUI G-koder till riktiga IATA-koder i historiken
+            if item.get("type") == "package" and item.get("source") == "tui":
+                tui_g_map = {
+                    "G-000000292": "CHQ", "G-000000293": "CHQ", "G-000000294": "CHQ", "G-000000295": "CHQ",
+                    "G-000000243": "PMI", "G-000000238": "PMI", "G-000000562": "PMI",
+                    "G-000000653": "AYT", "G-000001539": "AYT"
+                }
+                dest = item.get("destination")
+                if dest in tui_g_map:
+                    item["destination"] = tui_g_map[dest]
+
             migrated_items.append(item)
         run["flights"] = migrated_items
 
