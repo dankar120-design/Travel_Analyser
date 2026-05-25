@@ -3098,7 +3098,7 @@
           "price": 3920.0,
           "departure_date": "2026-05-26",
           "return_date": "2026-06-03",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PMI&SelectedDepCd=ARN&QueryDepDate=20260526&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DELA&QueryResID=169&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=21&price=3920",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260526&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DELA&QueryResID=169&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=21",
           "flight_data": null,
           "package_data": {
             "hotel_name": "BQ Delfín Azul",
@@ -3134,7 +3134,7 @@
           "price": 2310.0,
           "departure_date": "2026-05-27",
           "return_date": "2026-06-04",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=RHO&SelectedDepCd=ARN&QueryDepDate=20260527&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GREC&QueryResID=203&QueryCtryID=32&QueryAreaID=139&QueryDepID=2788&SelectedSerNo=31&price=2310",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260527&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GREC&QueryResID=203&QueryCtryID=32&QueryAreaID=139&QueryDepID=2788&SelectedSerNo=31",
           "flight_data": null,
           "package_data": {
             "hotel_name": "El Greco",
@@ -3170,7 +3170,7 @@
           "price": 3015.0,
           "departure_date": "2026-05-29",
           "return_date": "2026-06-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=LCA&SelectedDepCd=ARN&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51&price=3015",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Pavlinia",
@@ -3188,7 +3188,7 @@
           "price": 4880.0,
           "departure_date": "2026-05-29",
           "return_date": "2026-06-13",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=LCA&SelectedDepCd=ARN&QueryDepDate=20260529&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51&price=4880",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260529&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Pavlinia",
@@ -3257,10 +3257,10 @@
           "origin": "ARN",
           "destination": "KGS",
           "destination_name": "Pothia (Grekland)",
-          "price": 4025.0,
+          "price": 2310.0,
           "departure_date": "2026-05-29",
           "return_date": "2026-06-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=KGS&SelectedDepCd=ARN&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=KATE&QueryResID=90062&QueryCtryID=32&QueryAreaID=113&QueryDepID=2788&SelectedSerNo=51&price=4025",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=KGS&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=KATE&QueryResID=90062&QueryCtryID=32&QueryAreaID=113&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Katerina Apartments",
@@ -3296,7 +3296,7 @@
           "price": 4795.0,
           "departure_date": "2026-05-30",
           "return_date": "2026-06-07",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PMI&SelectedDepCd=ARN&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ZAME&QueryResID=308&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=61&price=4795",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ZAME&QueryResID=308&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Zafiro Cala Mesquida",
@@ -3332,7 +3332,7 @@
           "price": 2360.0,
           "departure_date": "2026-05-30",
           "return_date": "2026-06-07",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=ARN&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61&price=2360",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -3350,7 +3350,7 @@
           "price": 4375.0,
           "departure_date": "2026-05-30",
           "return_date": "2026-06-14",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=ARN&QueryDepDate=20260530&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61&price=4375",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260530&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -3404,7 +3404,7 @@
           "price": 2965.0,
           "departure_date": "2026-05-31",
           "return_date": "2026-06-08",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=RHO&SelectedDepCd=UME&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DIMI&QueryResID=211&QueryCtryID=32&QueryAreaID=139&QueryDepID=2793&SelectedSerNo=71&price=2965",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=UME&SelectedDestCd=RHO&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DIMI&QueryResID=211&QueryCtryID=32&QueryAreaID=139&QueryDepID=2793&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Dimitra",
@@ -3422,7 +3422,7 @@
           "price": 2595.0,
           "departure_date": "2026-05-31",
           "return_date": "2026-06-08",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=JSI&SelectedDepCd=ARN&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ARIA&QueryResID=312&QueryCtryID=32&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71&price=2595",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=JSI&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ARIA&QueryResID=312&QueryCtryID=32&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Hotel Ariadne",
@@ -3440,7 +3440,7 @@
           "price": 4445.0,
           "departure_date": "2026-05-31",
           "return_date": "2026-06-15",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=JSI&SelectedDepCd=ARN&QueryDepDate=20260531&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ARIA&QueryResID=312&QueryCtryID=32&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71&price=4445",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=JSI&QueryDepDate=20260531&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ARIA&QueryResID=312&QueryCtryID=32&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Hotel Ariadne",
@@ -3458,7 +3458,7 @@
           "price": 3115.0,
           "departure_date": "2026-06-01",
           "return_date": "2026-06-09",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=LCA&SelectedDepCd=ARN&QueryDepDate=20260601&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CHRI&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=11&price=3115",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260601&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CHRI&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=11",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Christabelle",
@@ -3476,7 +3476,7 @@
           "price": 3015.0,
           "departure_date": "2026-06-01",
           "return_date": "2026-06-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=LCA&SelectedDepCd=ARN&QueryDepDate=20260601&QueryDur=5&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SENA&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=11&price=3015",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260601&QueryDur=5&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SENA&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=11",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Senator",
@@ -3494,7 +3494,7 @@
           "price": 4175.0,
           "departure_date": "2026-06-01",
           "return_date": "2026-06-09",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=LCA&SelectedDepCd=LLA&QueryDepDate=20260601&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CHRI&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2779&SelectedSerNo=11&price=4175",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=LLA&SelectedDestCd=LCA&QueryDepDate=20260601&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CHRI&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2779&SelectedSerNo=11",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Christabelle",
@@ -3512,7 +3512,7 @@
           "price": 4730.0,
           "departure_date": "2026-06-02",
           "return_date": "2026-06-10",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PMI&SelectedDepCd=ARN&QueryDepDate=20260602&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ZAME&QueryResID=308&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=21&price=4730",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260602&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ZAME&QueryResID=308&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=21",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Zafiro Cala Mesquida",
@@ -3548,7 +3548,7 @@
           "price": 4325.0,
           "departure_date": "2026-06-04",
           "return_date": "2026-06-12",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=HER&SelectedDepCd=ARN&QueryDepDate=20260604&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ILIS&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=41&price=4325",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=HER&QueryDepDate=20260604&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ILIS&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=41",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Specified boende",
@@ -3584,7 +3584,7 @@
           "price": 4375.0,
           "departure_date": "2026-06-04",
           "return_date": "2026-06-19",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=HER&SelectedDepCd=ARN&QueryDepDate=20260604&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ELIN&QueryResID=221&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=41&price=4375",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=HER&QueryDepDate=20260604&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ELIN&QueryResID=221&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=41",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Elina Apartments",
@@ -3620,7 +3620,7 @@
           "price": 4125.0,
           "departure_date": "2026-06-05",
           "return_date": "2026-06-13",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=KGS&SelectedDepCd=ARN&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=KALD&QueryResID=39188&QueryCtryID=32&QueryAreaID=113&QueryDepID=2788&SelectedSerNo=51&price=4125",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=KGS&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=KALD&QueryResID=39188&QueryCtryID=32&QueryAreaID=113&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Kalydna Island Hotel",
@@ -3638,7 +3638,7 @@
           "price": 3015.0,
           "departure_date": "2026-06-05",
           "return_date": "2026-06-13",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=LCA&SelectedDepCd=ARN&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51&price=3015",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Pavlinia",
@@ -3674,7 +3674,7 @@
           "price": 4325.0,
           "departure_date": "2026-06-05",
           "return_date": "2026-06-13",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=SFT&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2787&SelectedSerNo=51&price=4325",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=SFT&SelectedDestCd=CHQ&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2787&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -3692,7 +3692,7 @@
           "price": 3520.0,
           "departure_date": "2026-06-05",
           "return_date": "2026-06-13",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=UME&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2793&SelectedSerNo=51&price=3520",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=UME&SelectedDestCd=CHQ&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2793&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -3710,7 +3710,7 @@
           "price": 4780.0,
           "departure_date": "2026-06-05",
           "return_date": "2026-06-20",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=UME&QueryDepDate=20260605&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2793&SelectedSerNo=51&price=4780",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=UME&SelectedDestCd=CHQ&QueryDepDate=20260605&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2793&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -3782,7 +3782,7 @@
           "price": 3320.0,
           "departure_date": "2026-06-06",
           "return_date": "2026-06-14",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PVK&SelectedDepCd=ARN&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PDON&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61&price=3320",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PVK&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PDON&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Poseidon",
@@ -3818,7 +3818,7 @@
           "price": 2765.0,
           "departure_date": "2026-06-06",
           "return_date": "2026-06-14",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=KVA&SelectedDepCd=ARN&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GAST&QueryResID=77372&QueryCtryID=32&QueryAreaID=77371&QueryDepID=2788&SelectedSerNo=61&price=2765",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=KVA&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GAST&QueryResID=77372&QueryCtryID=32&QueryAreaID=77371&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Garden Studios Thassos Town",
@@ -3836,7 +3836,7 @@
           "price": 2715.0,
           "departure_date": "2026-06-06",
           "return_date": "2026-06-21",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260606&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=2715",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260606&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Atak Apart Hotel",
@@ -3872,7 +3872,7 @@
           "price": 4225.0,
           "departure_date": "2026-06-07",
           "return_date": "2026-06-15",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260607&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4225",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260607&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Prince Apart",
@@ -3926,7 +3926,7 @@
           "price": 4830.0,
           "departure_date": "2026-06-10",
           "return_date": "2026-06-25",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=RHO&SelectedDepCd=ARN&QueryDepDate=20260610&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GREC&QueryResID=203&QueryCtryID=32&QueryAreaID=139&QueryDepID=2788&SelectedSerNo=31&price=4830",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260610&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GREC&QueryResID=203&QueryCtryID=32&QueryAreaID=139&QueryDepID=2788&SelectedSerNo=31",
           "flight_data": null,
           "package_data": {
             "hotel_name": "El Greco",
@@ -3944,7 +3944,7 @@
           "price": 3520.0,
           "departure_date": "2026-06-12",
           "return_date": "2026-06-20",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=SPU&SelectedDepCd=ARN&QueryDepDate=20260612&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HOSA&QueryResID=80057&QueryCtryID=20&QueryAreaID=80056&QueryDepID=2788&SelectedSerNo=51&price=3520",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=SPU&QueryDepDate=20260612&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HOSA&QueryResID=80057&QueryCtryID=20&QueryAreaID=80056&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "House Santro",
@@ -3962,7 +3962,7 @@
           "price": 4475.0,
           "departure_date": "2026-06-12",
           "return_date": "2026-06-27",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=SPU&SelectedDepCd=ARN&QueryDepDate=20260612&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HOSA&QueryResID=80057&QueryCtryID=20&QueryAreaID=80056&QueryDepID=2788&SelectedSerNo=51&price=4475",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=SPU&QueryDepDate=20260612&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HOSA&QueryResID=80057&QueryCtryID=20&QueryAreaID=80056&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "House Santro",
@@ -3980,7 +3980,7 @@
           "price": 3670.0,
           "departure_date": "2026-06-13",
           "return_date": "2026-06-21",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260613&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=3670",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260613&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -3998,7 +3998,7 @@
           "price": 4375.0,
           "departure_date": "2026-06-13",
           "return_date": "2026-06-21",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=ARN&QueryDepDate=20260613&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=KALA&QueryResID=584&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61&price=4375",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260613&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=KALA&QueryResID=584&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Porto Kalamaki",
@@ -4034,7 +4034,7 @@
           "price": 4325.0,
           "departure_date": "2026-06-13",
           "return_date": "2026-06-28",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260613&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=4325",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260613&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Atak Apart Hotel",
@@ -4106,7 +4106,7 @@
           "price": 3520.0,
           "departure_date": "2026-06-14",
           "return_date": "2026-06-29",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260614&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=3520",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260614&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Atak Apart Hotel",
@@ -4124,7 +4124,7 @@
           "price": 4475.0,
           "departure_date": "2026-06-20",
           "return_date": "2026-06-28",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260620&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=4475",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260620&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Atak Apart Hotel",
@@ -4142,7 +4142,7 @@
           "price": 3520.0,
           "departure_date": "2026-06-21",
           "return_date": "2026-06-29",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260621&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=3520",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260621&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4160,7 +4160,7 @@
           "price": 4325.0,
           "departure_date": "2026-06-21",
           "return_date": "2026-06-29",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260621&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4325",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260621&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4178,7 +4178,7 @@
           "price": 3970.0,
           "departure_date": "2026-06-28",
           "return_date": "2026-07-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260628&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=3970",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260628&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4196,7 +4196,7 @@
           "price": 4475.0,
           "departure_date": "2026-07-12",
           "return_date": "2026-07-20",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260712&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=BOUG&QueryResID=215&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4475",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260712&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=BOUG&QueryResID=215&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Begonville Side",
@@ -4214,7 +4214,7 @@
           "price": 4125.0,
           "departure_date": "2026-07-19",
           "return_date": "2026-07-27",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260719&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4125",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260719&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Prince Apart",
@@ -4232,7 +4232,7 @@
           "price": 4730.0,
           "departure_date": "2026-07-26",
           "return_date": "2026-08-03",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260726&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SUNW&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4730",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260726&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SUNW&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Sunway Hotel",
@@ -4250,7 +4250,7 @@
           "price": 4375.0,
           "departure_date": "2026-08-02",
           "return_date": "2026-08-10",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260802&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4375",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260802&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Prince Apart",
@@ -4268,7 +4268,7 @@
           "price": 4930.0,
           "departure_date": "2026-08-09",
           "return_date": "2026-08-24",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260809&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4930",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260809&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4286,7 +4286,7 @@
           "price": 4175.0,
           "departure_date": "2026-08-15",
           "return_date": "2026-08-23",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260815&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=4175",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260815&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Prince Apart",
@@ -4304,7 +4304,7 @@
           "price": 4675.0,
           "departure_date": "2026-08-15",
           "return_date": "2026-08-23",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=ARN&QueryDepDate=20260815&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61&price=4675",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260815&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -4322,7 +4322,7 @@
           "price": 4980.0,
           "departure_date": "2026-08-15",
           "return_date": "2026-08-23",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PVK&SelectedDepCd=ARN&QueryDepDate=20260815&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PDON&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61&price=4980",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PVK&QueryDepDate=20260815&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PDON&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Poseidon",
@@ -4340,7 +4340,7 @@
           "price": 3620.0,
           "departure_date": "2026-08-16",
           "return_date": "2026-08-24",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260816&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=3620",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260816&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "The S Apart",
@@ -4358,7 +4358,7 @@
           "price": 4475.0,
           "departure_date": "2026-08-22",
           "return_date": "2026-08-30",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PVK&SelectedDepCd=ARN&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PDON&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61&price=4475",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PVK&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PDON&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Poseidon",
@@ -4373,10 +4373,10 @@
           "origin": "ARN",
           "destination": "CHQ",
           "destination_name": "Chaniakusten, Kolimbari (Grekland)",
-          "price": 4830.0,
+          "price": 4880.0,
           "departure_date": "2026-08-22",
           "return_date": "2026-08-30",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=ARN&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61&price=4830",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -4394,7 +4394,7 @@
           "price": 4475.0,
           "departure_date": "2026-08-22",
           "return_date": "2026-08-30",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=4475",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Atak Apart Hotel",
@@ -4412,7 +4412,7 @@
           "price": 4525.0,
           "departure_date": "2026-08-22",
           "return_date": "2026-08-30",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=KVA&SelectedDepCd=ARN&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GAST&QueryResID=77372&QueryCtryID=32&QueryAreaID=77371&QueryDepID=2788&SelectedSerNo=61&price=4525",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=KVA&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GAST&QueryResID=77372&QueryCtryID=32&QueryAreaID=77371&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Garden Studios Thassos Town",
@@ -4430,7 +4430,7 @@
           "price": 3970.0,
           "departure_date": "2026-08-23",
           "return_date": "2026-08-31",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260823&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=3970",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260823&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Prince Apart",
@@ -4448,7 +4448,7 @@
           "price": 4625.0,
           "departure_date": "2026-08-29",
           "return_date": "2026-09-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260829&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=4625",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260829&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PRIN&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Prince Apart",
@@ -4466,7 +4466,7 @@
           "price": 4880.0,
           "departure_date": "2026-08-29",
           "return_date": "2026-09-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=CHQ&SelectedDepCd=ARN&QueryDepDate=20260829&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61&price=4880",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260829&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Michalis Apartments",
@@ -4484,7 +4484,7 @@
           "price": 4325.0,
           "departure_date": "2026-08-29",
           "return_date": "2026-09-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=PVK&SelectedDepCd=ARN&QueryDepDate=20260829&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PHIL&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61&price=4325",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PVK&QueryDepDate=20260829&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PHIL&QueryResID=101956&QueryCtryID=32&QueryAreaID=135&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Philoxenia Hotel",
@@ -4502,7 +4502,7 @@
           "price": 4375.0,
           "departure_date": "2026-08-30",
           "return_date": "2026-09-07",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260830&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4375",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260830&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4520,7 +4520,7 @@
           "price": 4625.0,
           "departure_date": "2026-09-05",
           "return_date": "2026-09-13",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260905&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=4625",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260905&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4538,7 +4538,7 @@
           "price": 4225.0,
           "departure_date": "2026-09-06",
           "return_date": "2026-09-14",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260906&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4225",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260906&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4556,7 +4556,7 @@
           "price": 4780.0,
           "departure_date": "2026-09-12",
           "return_date": "2026-09-20",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=AYT&SelectedDepCd=ARN&QueryDepDate=20260912&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61&price=4780",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260912&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=61",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4574,7 +4574,7 @@
           "price": 4375.0,
           "departure_date": "2026-09-13",
           "return_date": "2026-09-21",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260913&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4375",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260913&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -4592,7 +4592,7 @@
           "price": 4730.0,
           "departure_date": "2026-09-20",
           "return_date": "2026-09-28",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDestCd=GZP&SelectedDepCd=ARN&QueryDepDate=20260920&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71&price=4730",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260920&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=OCEA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Belle-Ocean Apart Hotel",
@@ -5453,7 +5453,7 @@
           "origin": "ARN",
           "destination": "RHO",
           "destination_name": "Rhodos stad (Grekland)",
-          "price": 2865.0,
+          "price": 2310.0,
           "departure_date": "2026-06-03",
           "return_date": "2026-06-11",
           "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260603&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HELA&QueryResID=203&QueryCtryID=32&QueryAreaID=139&QueryDepID=2788&SelectedSerNo=31",
@@ -5579,10 +5579,10 @@
           "origin": "ARN",
           "destination": "PMI",
           "destination_name": "Okänt resmål (Okänt land)",
-          "price": 4675.0,
+          "price": 4525.0,
           "departure_date": "2026-05-29",
           "return_date": "2026-06-06",
-          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DELA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CAPF&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
           "flight_data": null,
           "package_data": {
             "hotel_name": "Specified boende",

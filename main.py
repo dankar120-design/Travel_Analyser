@@ -538,8 +538,7 @@ def update_state(new_flights, new_packages=None):
         else:
             combined_items = all_new_items
 
-        unique_items = []
-        seen_keys = set()
+        unique_items_dict = {}
         
         for item in combined_items:
             if item["type"] == "flight":
@@ -558,10 +557,9 @@ def update_state(new_flights, new_packages=None):
                     item["package_data"]["hotel_name"], 
                     item["package_data"]["operator"]
                 )
-                
-            if key not in seen_keys:
-                seen_keys.add(key)
-                unique_items.append(item)
+            unique_items_dict[key] = item
+            
+        unique_items = list(unique_items_dict.values())
                 
         if today_run is not None:
             today_run["flights"] = unique_items
@@ -578,8 +576,7 @@ def update_state(new_flights, new_packages=None):
     
     # Extra deduplicering över hela historiken (för att städa upp eventuella gamla duplikatposter per dag)
     for run in state["history"]:
-        run_seen = set()
-        run_unique = []
+        run_unique_dict = {}
         for item in run.get("flights", []):
             if item["type"] == "flight":
                 key = (
@@ -597,10 +594,8 @@ def update_state(new_flights, new_packages=None):
                     item["package_data"]["hotel_name"], 
                     item["package_data"]["operator"]
                 )
-            if key not in run_seen:
-                run_seen.add(key)
-                run_unique.append(item)
-        run["flights"] = run_unique
+            run_unique_dict[key] = item
+        run["flights"] = list(run_unique_dict.values())
         
     try:
         with open(state_file, "w", encoding="utf-8") as f:
@@ -1370,9 +1365,29 @@ def run_groq_analysis(flights):
         "Content-Type": "application/json"
     }
     
+    # Pre-processing av flygfynd:
+    # 1. Separera Skellefteå (SFT) vs icke-SFT
+    sft_deals = [f for f in flights if f.get("origin") == "SFT"]
+    non_sft_deals = [f for f in flights if f.get("origin") != "SFT"]
+    
+    # Sortera SFT-resor efter pris ascending
+    sft_deals.sort(key=lambda x: x.get("price", 999999))
+    
+    # 2. Separera icke-SFT i flygstolar och paketresor för balanserad representation
+    non_sft_flights = [f for f in non_sft_deals if f.get("type") == "flight"]
+    non_sft_packages = [f for f in non_sft_deals if f.get("type") == "package"]
+    
+    non_sft_flights.sort(key=lambda x: x.get("price", 999999))
+    non_sft_packages.sort(key=lambda x: x.get("price", 999999))
+    
+    # 3. Plocka ut det absoluta topp-urvalet (max 5 SFT, 4 billigaste externa flyg, 4 billigaste externa paket)
+    selected_deals = sft_deals[:5] + non_sft_flights[:4] + non_sft_packages[:4]
+    
+    print(f"[Groq Pre-processing] Skickar {len(selected_deals)} utvalda resor av {len(flights)} totalt (SFT: {len(sft_deals[:5])}, Övriga flyg: {len(non_sft_flights[:4])}, Övriga paket: {len(non_sft_packages[:4])})")
+    
     # Förbered kompakt JSON-data för Groq (polymorfiskt säker)
     compact_data = []
-    for f in flights:
+    for f in selected_deals:
         if f['type'] == 'flight':
             compact_data.append({
                 "Typ": "Flyg",
@@ -1394,10 +1409,10 @@ def run_groq_analysis(flights):
     system_prompt = (
         "Du är en personlig reseexpert för en användare bosatt i Skellefteå (SFT). "
         "Din uppgift är att skriva en extremt kortfattad, slagkraftig och lockande morgonsammanfattning på svenska "
-        "av dygnets absolut bästa fynd (både reguljärflyg och paketresor från Ving och TUI). "
+        "av dygnets absolut bästa fynd utifrån den tillhandahållna listkan (som redan är sorterad med Skellefteå-fynd först, följt av andra närliggande flygplatser).\n\n"
         "Regler:\n"
-        "1. Analysera datan och lyft fram de 2-3 absolut bästa priserna, särskilt om det finns billiga sista-minuten paketresor.\n"
-        "2. Skellefteå-fokus: Om det finns ett bra fynd direkt från SFT ska det hyllas. Om det däremot finns ett fynd från Umeå (UME), Luleå (LLA) eller Arlanda (ARN) som gör att det är värt transfern, förklara det kort.\n"
+        "1. Analysera listan och lyft fram de 2-3 absolut bästa fynden.\n"
+        "2. Skellefteå-fokus: Om det finns ett bra fynd direkt från SFT ska det hyllas först och mest! Om det däremot finns ett enastående fynd från Umeå (UME), Luleå (LLA) eller Arlanda (ARN) som gör att det är värt transfern, nämn det kort.\n"
         "3. Håll språket personligt, inspirerande men mycket kortfattat (max 140 ord!). Använd korta meningar och punktlistor.\n"
         "4. Formatera svaret i ren och enkel text så att den lätt kan konverteras till Telegram-Markdown. Undvik komplex HTML."
     )
@@ -1406,9 +1421,9 @@ def run_groq_analysis(flights):
         "model": "llama-3.3-70b-versatile",
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Här är dagens hittade resor under tröskelvärdena: {json.dumps(compact_data, ensure_ascii=False)}"}
+            {"role": "user", "content": f"Här är dagens absolut bästa fynd: {json.dumps(compact_data, ensure_ascii=False)}"}
         ],
-        "temperature": 0.3
+        "temperature": 0.1
     }
     
     try:
