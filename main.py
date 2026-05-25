@@ -4,6 +4,7 @@ import json
 import datetime
 import requests
 import time
+import re
 
 try:
     from dotenv import load_dotenv
@@ -134,6 +135,18 @@ def search_flight(token, origin, destination, dep_date, ret_date):
         print(f"Fel vid flygsökning {origin}->{destination} ({dep_date}): {e}")
         return []
 
+def format_skyscanner_date(date_str):
+    """
+    Formaterar om YYYY-MM-DD till YYMMDD för Skyscanner-kompatibilitet.
+    Använder strikt datetime-parsing för att förhindra felaktig formatering.
+    """
+    try:
+        dt = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+        return dt.strftime("%y%m%d")
+    except Exception as e:
+        print(f"Fel vid omformatering av datum '{date_str}' för Skyscanner: {e}")
+        return "".join(date_str.split("-"))[2:]
+
 def parse_flights(flight_offers, origin, destination, trip_type):
     """Rensar och filtrerar Travelpayouts-datan lokalt i Python."""
     parsed = []
@@ -153,6 +166,9 @@ def parse_flights(flight_offers, origin, destination, trip_type):
             stops = offer.get("number_of_changes", 0)
             gate = offer.get("gate", "Flygbolag")
             
+            dep_date_sky = format_skyscanner_date(dep_date)
+            ret_date_sky = format_skyscanner_date(ret_date)
+            
             parsed.append({
                 "source": "travelpayouts",
                 "type": "flight",
@@ -162,7 +178,7 @@ def parse_flights(flight_offers, origin, destination, trip_type):
                 "price": price,
                 "departure_date": dep_date,
                 "return_date": ret_date,
-                "deep_link": f"https://www.skyscanner.se/transport/flights/{origin.lower()}/{destination.lower()}/{dep_date}/{ret_date}?adults=1",
+                "deep_link": f"https://www.skyscanner.se/transport/flights/{origin.lower()}/{destination.lower()}/{dep_date_sky}/{ret_date_sky}?adults=1",
                 "flight_data": {
                     "departure_time": "--:--",
                     "arrival_time": "--:--",
@@ -310,7 +326,7 @@ def scrape_ving_lastminute():
                 
                 country_ca_id = country_obj.get("caId", "-1")
                 resort_ca_id = resort_obj.get("caId", "-1")
-                area_ca_id = area_obj.get("area", "-1")
+                area_ca_id = area_obj.get("caId", "-1")
                 
                 departure_obj = node.get("departure") or {}
                 dep_id = departure_obj.get("caId", "-1")
@@ -360,6 +376,95 @@ def scrape_ving_lastminute():
         print(f"Fel vid hämtning av Ving sista minuten: {e}")
         return []
 
+def scrape_tui_lastminute():
+    """
+    Hämtar sista-minuten-paketresor direkt från TUI:s CloudFront deals API.
+    Använder curl_cffi med impersonate="chrome" för att bypassa Akamai WAF.
+    Felhanterad för att förhindra krascher på Linux.
+    """
+    print("Söker efter TUI sista-minuten-paketresor...")
+    try:
+        from curl_cffi import requests as curl_requests
+    except ImportError:
+        print("Varning: curl_cffi kunde inte importeras. TUI-skrapning inaktiverad.")
+        return []
+        
+    url = "https://dy5sej8tzf1b8.cloudfront.net/ml/deals/deals/"
+    params = {
+        "market": "se",
+        "locale": "sv-SE",
+        "offset": 1,
+        "numberOfResults": 100,
+        "dealsId": "sista-minuten-nu",
+        "sortBy": "price"
+    }
+    
+    try:
+        response = curl_requests.get(url, params=params, impersonate="chrome", timeout=20)
+        if response.status_code != 200:
+            print(f"Fel vid anrop till TUI API: Status {response.status_code}")
+            return []
+            
+        data = response.json()
+        offers = data.get("offers", [])
+        
+        parsed_packages = []
+        allowed_origins = ["ARN", "SFT", "UME", "LLA"]
+        
+        for offer in offers:
+            origin = offer.get("departureAirport", {}).get("code")
+            if origin not in allowed_origins:
+                continue
+                
+            price = float(offer.get("pricePerPerson", {}).get("amount", 0))
+            if price > 5000:
+                continue
+                
+            destination_code = offer.get("hotel", {}).get("geo", {}).get("destinationCode")
+            resort_name = offer.get("hotel", {}).get("geo", {}).get("resort", "Okänt resmål")
+            country_name = offer.get("hotel", {}).get("geo", {}).get("country", "Okänt land")
+            
+            departure_date = offer.get("departureDate", offer.get("arrivalDate"))
+            duration = int(offer.get("duration", 7))
+            
+            try:
+                dep_dt = datetime.datetime.strptime(departure_date, "%Y-%m-%d")
+                ret_dt = dep_dt + datetime.timedelta(days=duration)
+                return_date = ret_dt.strftime("%Y-%m-%d")
+            except Exception:
+                return_date = departure_date
+                
+            hotel_name = offer.get("hotel", {}).get("name", "Ospecificerat boende")
+            stars = offer.get("hotel", {}).get("tuiRating")
+            
+            book_link = offer.get("bookLink", "")
+            deep_link = f"https://www.tui.se{book_link}" if book_link else "https://www.tui.se"
+            
+            parsed_packages.append({
+                "source": "tui",
+                "type": "package",
+                "origin": origin,
+                "destination": destination_code,
+                "destination_name": f"{resort_name} ({country_name})",
+                "price": price,
+                "departure_date": departure_date,
+                "return_date": return_date,
+                "deep_link": deep_link,
+                "flight_data": None,
+                "package_data": {
+                    "hotel_name": hotel_name,
+                    "stars": stars,
+                    "nights": duration,
+                    "operator": "TUI"
+                }
+            })
+            
+        print(f"Hittade {len(parsed_packages)} st TUI-paket under tröskelvärdet!")
+        return parsed_packages
+    except Exception as e:
+        print(f"Fel vid hämtning av TUI sista minuten: {e}")
+        return []
+
 
 def update_state(new_flights, new_packages=None):
     """Sparar och ackumulerar historisk flyg- och paketdata i data/price_history.json (max 30 dagar) med strikt deduplicering."""
@@ -390,7 +495,7 @@ def update_state(new_flights, new_packages=None):
             # Om posten är det gamla platta formatet, migrera den till nya polymorfiska formatet
             if "flight_data" not in item and "package_data" not in item:
                 # Det gamla platta formatet
-                migrated_items.append({
+                item = {
                     "source": "travelpayouts",
                     "type": "flight",
                     "origin": item.get("origin"),
@@ -410,19 +515,43 @@ def update_state(new_flights, new_packages=None):
                         "baggage_included": item.get("baggage_included", False)
                     },
                     "package_data": None
-                })
-            else:
-                migrated_items.append(item)
+                }
+            
+            # Städa Skyscanner-länkar i befintliga/migrerade flighter om de har YYYY-MM-DD-format
+            if item.get("type") == "flight" and "deep_link" in item:
+                link = item["deep_link"]
+                dates = re.findall(r"\d{4}-\d{2}-\d{2}", link)
+                if dates:
+                    for d in dates:
+                        try:
+                            yyyymmdd = datetime.datetime.strptime(d, "%Y-%m-%d").strftime("%y%m%d")
+                            link = link.replace(d, yyyymmdd)
+                        except Exception:
+                            pass
+                    item["deep_link"] = link
+
+            migrated_items.append(item)
         run["flights"] = migrated_items
 
     today_str = datetime.date.today().strftime("%Y-%m-%d")
     
     # Förbered dagens körning och gör en strikt deduplicering av dagens skörd
     if all_new_items:
+        today_run = None
+        for run in state["history"]:
+            if run.get("date") == today_str:
+                today_run = run
+                break
+                
+        if today_run is not None:
+            combined_items = today_run.get("flights", []) + all_new_items
+        else:
+            combined_items = all_new_items
+
         unique_items = []
         seen_keys = set()
         
-        for item in all_new_items:
+        for item in combined_items:
             if item["type"] == "flight":
                 key = (
                     item["origin"], 
@@ -438,6 +567,7 @@ def update_state(new_flights, new_packages=None):
                     item["departure_date"], 
                     item["package_data"]["nights"], 
                     item["package_data"]["hotel_name"], 
+                    item["package_data"]["operator"],
                     item["price"]
                 )
                 
@@ -445,11 +575,14 @@ def update_state(new_flights, new_packages=None):
                 seen_keys.add(key)
                 unique_items.append(item)
                 
-        # Lägg till dagens skörd med tidsstämpel
-        state["history"].append({
-            "date": today_str,
-            "flights": unique_items
-        })
+        if today_run is not None:
+            today_run["flights"] = unique_items
+        else:
+            # Lägg till dagens skörd med tidsstämpel
+            state["history"].append({
+                "date": today_str,
+                "flights": unique_items
+            })
         
     # Behåll endast de senaste 30 dagarnas körningar för att förhindra gigantiska filer
     thirty_days_ago = (datetime.date.today() - datetime.timedelta(days=30)).strftime("%Y-%m-%d")
@@ -475,6 +608,7 @@ def update_state(new_flights, new_packages=None):
                     item["departure_date"], 
                     item["package_data"]["nights"], 
                     item["package_data"]["hotel_name"], 
+                    item["package_data"]["operator"],
                     item["price"]
                 )
             if key not in run_seen:
@@ -865,7 +999,7 @@ def generate_html_dashboard(state):
         <div class="system-status-banner" style="background: rgba(16, 185, 129, 0.06); border-color: rgba(16, 185, 129, 0.15);">
             <span class="status-dot" style="background-color: var(--success); box-shadow: 0 0 10px rgba(16, 185, 129, 0.6); animation: pulse-success 2s infinite;"></span>
             <div class="status-text">
-                <strong>System Status:</strong> Aktiv & Framtidssäkrad (Travelpayouts API & Ving Sista-Minuten). Skanning rullar dagligen med full täckning och livslängd!
+                <strong>System Status:</strong> Aktiv & Framtidssäkrad (Travelpayouts API & Ving & TUI Sista-Minuten). Skanning rullar dagligen med full täckning och livslängd!
             </div>
         </div>
 
@@ -961,6 +1095,12 @@ def generate_html_dashboard(state):
                         <a href="${{f.deep_link}}" target="_blank" class="book-btn">Sök på Skyscanner</a>
                     `;
                 }} else if (f.type === 'package') {{
+                    const isTUI = f.package_data.operator === 'TUI';
+                    const btnText = isTUI ? 'Boka hos TUI' : 'Boka hos Ving';
+                    const btnStyle = isTUI 
+                        ? 'background: linear-gradient(135deg, #09a0e0, #0284c7); box-shadow: 0 4px 12px rgba(9, 160, 224, 0.4);' 
+                        : 'background: linear-gradient(135deg, var(--accent), #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);';
+                        
                     card.innerHTML = `
                         <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent); border-color: var(--accent);">🌴 Paketresa (Flyg+Hotell)</span>
                         <div>
@@ -1004,7 +1144,7 @@ def generate_html_dashboard(state):
                                 </div>
                             </div>
                         </div>
-                        <a href="${{f.deep_link}}" target="_blank" class="book-btn" style="background: linear-gradient(135deg, var(--accent), #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);">Boka hos Ving</a>
+                        <a href="${{f.deep_link}}" target="_blank" class="book-btn" style="${{btnStyle}}">${{btnText}}</a>
                     `;
                 }}
                 
@@ -1082,7 +1222,7 @@ def run_groq_analysis(flights):
     system_prompt = (
         "Du är en personlig reseexpert för en användare bosatt i Skellefteå (SFT). "
         "Din uppgift är att skriva en extremt kortfattad, slagkraftig och lockande morgonsammanfattning på svenska "
-        "av dygnets absolut bästa fynd (både reguljärflyg och paketresor från Ving). "
+        "av dygnets absolut bästa fynd (både reguljärflyg och paketresor från Ving och TUI). "
         "Regler:\n"
         "1. Analysera datan och lyft fram de 2-3 absolut bästa priserna, särskilt om det finns billiga sista-minuten paketresor.\n"
         "2. Skellefteå-fokus: Om det finns ett bra fynd direkt från SFT ska det hyllas. Om det däremot finns ett fynd från Umeå (UME), Luleå (LLA) eller Arlanda (ARN) som gör att det är värt transfern, förklara det kort.\n"
@@ -1162,7 +1302,7 @@ def send_telegram_message(bulletin):
             print(f"Helt misslyckad Telegram-sändning: {e2}")
 
 def main():
-    print("=== Startar Reseanalysatorn (Travelpayouts API + Ving Scraper) ===")
+    print("=== Startar Reseanalysatorn (Travelpayouts API + Ving & TUI Scrapers) ===")
     
     if not TRAVELPAYOUTS_TOKEN:
         print("Fel: TRAVELPAYOUTS_TOKEN måste vara satt.")
@@ -1172,6 +1312,7 @@ def main():
         
     # 1. Hämta Ving sista-minuten-paketresor (Skrapas alltid eftersom det är gratis GraphQL utan API limits)
     ving_packages = scrape_ving_lastminute()
+    tui_packages = scrape_tui_lastminute()
     
     # 2. Generera sökdatum och avreseort för flygsökningar
     search_dates = generate_search_dates()
@@ -1242,11 +1383,11 @@ def main():
     print(f"Flygskanning klar! Hittade totalt {len(all_found_flights)} st intressanta flyg.")
     
     # 4. Spara till state och generera dashboard (både flyg och paket)
-    state = update_state(all_found_flights, ving_packages)
+    state = update_state(all_found_flights, ving_packages + tui_packages)
     generate_html_dashboard(state)
     
     # Kombinera dagens skörd för Groq AI-Analys
-    dagens_skord = all_found_flights + ving_packages
+    dagens_skord = all_found_flights + ving_packages + tui_packages
     
     # 5. Groq AI-Analys (Bulletin)
     if is_deep:
