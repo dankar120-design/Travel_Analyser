@@ -312,8 +312,7 @@ def scrape_ving_lastminute():
                 if offer["type"] == "unspecified":
                     hotel_name = "Ospecificerat boende"
                 
-                # Bygg en direkt booking-länk (upsell)
-                pax = "42,42" if node.get("numFreeSeats", 1) > 1 else "42"
+                # Bygg en sök-länk för sista-minuten som bypassar sessionskravet och 403
                 dep_date_clean = (node.get("date") or {}).get("raw", "").split("T")[0].replace("-", "")
                 
                 hotel_node = node.get("hotel") or {}
@@ -333,22 +332,9 @@ def scrape_ving_lastminute():
                 
                 query_res_id = resort_ca_id if offer["type"] == "specified" else "-1"
                 
-                upsell_query = [
-                    f"SelectedDestCd={destination_code}",
-                    f"SelectedDepCd={departure_code}",
-                    f"QueryDepDate={dep_date_clean}",
-                    f"QueryDur={duration}",
-                    f"QueryRoomAges={pax}",
-                    "QueryUnits=1",
-                    f"SelectedHotCd={offer['hotelCode']}",
-                    f"QueryResID={query_res_id}",
-                    f"QueryCtryID={country_ca_id}",
-                    f"QueryAreaID={area_ca_id}",
-                    f"QueryDepID={dep_id}",
-                    f"SelectedSerNo={node.get('serialNumber', '-1')}",
-                    f"price={offer['price']}"
-                ]
-                deep_link = "https://www.ving.se/resor/bokningssteg/upsell?" + "&".join(upsell_query)
+                # Bygg en robust sista-minuten sök-länk som inte ger 403
+                serial_no = node.get('serialNumber') or '-1'
+                deep_link = f"https://www.ving.se/sista-minuten?SelectedDepCd={departure_code}&SelectedDestCd={destination_code}&QueryDepDate={dep_date_clean}&QueryDur={duration}&QueryRoomAges=42&QueryUnits=1&SelectedHotCd={offer['hotelCode']}&QueryResID={query_res_id}&QueryCtryID={country_ca_id}&QueryAreaID={area_ca_id}&QueryDepID={dep_id}&SelectedSerNo={serial_no}"
                 
                 parsed_packages.append({
                     "source": "ving",
