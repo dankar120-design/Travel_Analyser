@@ -1092,7 +1092,7 @@ def generate_html_dashboard(state):
                                 <span class="baggage-badge ${{bagClass}}">${{bagText}}</span>
                             </div>
                         </div>
-                        <a href="${{f.deep_link}}" target="_blank" class="book-btn">Sök på Skyscanner</a>
+                        <a href="${{f.deep_link}}" target="_blank" rel="noopener noreferrer" class="book-btn">Sök på Skyscanner</a>
                     `;
                 }} else if (f.type === 'package') {{
                     const isTUI = f.package_data.operator === 'TUI';
@@ -1144,7 +1144,7 @@ def generate_html_dashboard(state):
                                 </div>
                             </div>
                         </div>
-                        <a href="${{f.deep_link}}" target="_blank" class="book-btn" style="${{btnStyle}}">${{btnText}}</a>
+                        <a href="${{f.deep_link}}" target="_blank" rel="noopener noreferrer" class="book-btn" style="${{btnStyle}}">${{btnText}}</a>
                     `;
                 }}
                 
