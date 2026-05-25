@@ -1,6 +1,8 @@
 name: Travel Analyser
 
 on:
+  push:
+    branches: [ main ]
   schedule:
     # Kör varje morgon kl 08:00 UTC (09:00 eller 10:00 svensk tid)
     - cron: '0 8 * * *'

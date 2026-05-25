@@ -1,4 +1,6 @@
 requests
 python-dotenv
 beautifulsoup4
+curl_cffi
+
 
