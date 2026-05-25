@@ -1152,6 +1152,17 @@ def generate_html_dashboard(state):
             text-transform: uppercase;
         }}
 
+        .deal-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }}
+
         /* Varumärkesunika ram-accents och skugg-glows */
         :root {{
             --ving-color: var(--accent);
@@ -1380,7 +1391,7 @@ def generate_html_dashboard(state):
                             icon = '⭐';
                             style = 'background: rgba(79, 70, 229, 0.2); color: #a5b4fc; border: 1px solid rgba(79, 70, 229, 0.4);';
                         }}
-                        return `<span class="brand-badge" style="${{style}}">${{icon}} ${{t}}</span>`;
+                        return `<span class="deal-badge" style="${{style}}">${{icon}} ${{t}}</span>`;
                     }}).join(' ');
                 }}
                 
@@ -1452,12 +1463,12 @@ def generate_html_dashboard(state):
                         <div class="action-btn" onclick="toggleFav('${{f.id}}', event)" style="color: ${{favColor}}" title="Markera som favorit">❤️</div>
                         <div class="action-btn" onclick="toggleHide('${{f.id}}', event)" title="${{isHidden ? 'Återställ dolda' : 'Dölj resa'}}">${{hideIcon}}</div>
                     </div>
-                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; padding-top: 2.5rem;">
                         ${{badgeHtml}}
                         ${{tagsHtml}}
                     </div>
                     <div>
-                        <div class="route-info" style="margin-top: 1.5rem;">
+                        <div class="route-info">
                             <div>
                                 <div class="route-code">${{f.origin}}</div>
                                 <div style="font-size: 0.8rem; color: var(--text-muted);">Utresa</div>
