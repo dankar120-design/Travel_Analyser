@@ -5428,6 +5428,78 @@
             "nights": 8,
             "operator": "Ving"
           }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "SPU",
+          "destination_name": "Baska Voda (Kroatien)",
+          "price": 3115.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=SPU&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PUTN&QueryResID=80057&QueryCtryID=20&QueryAreaID=80056&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Apartments Putnik",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Rhodos stad (Grekland)",
+          "price": 2865.0,
+          "departure_date": "2026-06-03",
+          "return_date": "2026-06-11",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260603&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HELA&QueryResID=203&QueryCtryID=32&QueryAreaID=139&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Helena",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "SPU",
+          "destination_name": "Brela (Kroatien)",
+          "price": 4225.0,
+          "departure_date": "2026-06-05",
+          "return_date": "2026-06-13",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=SPU&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=LONR&QueryResID=80058&QueryCtryID=20&QueryAreaID=80056&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Loncar",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "GZP",
+          "destination_name": "Alanya (Turkiet)",
+          "price": 4325.0,
+          "departure_date": "2026-06-14",
+          "return_date": "2026-06-29",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260614&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Atak Apart Hotel",
+            "stars": null,
+            "nights": 15,
+            "operator": "Ving"
+          }
         }
       ]
     }
