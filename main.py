@@ -35,6 +35,28 @@ DESTINATIONS = {
     "FCO": "Rom"
 }
 
+# Fallback-ordlista för charterdestinationer (IATA -> Stad, Land)
+IATA_FALLBACK = {
+    "AYT": ("Alanya/Antalya", "Turkiet"),
+    "GZP": ("Alanya", "Turkiet"),
+    "CHQ": ("Chania", "Grekland"),
+    "HER": ("Heraklion", "Grekland"),
+    "JSI": ("Skiathos", "Grekland"),
+    "KGS": ("Kos", "Grekland"),
+    "KVA": ("Thassos", "Grekland"),
+    "LCA": ("Larnaca", "Cypern"),
+    "LPA": ("Gran Canaria", "Spanien"),
+    "PMI": ("Mallorca", "Spanien"),
+    "PVK": ("Preveza/Lefkas", "Grekland"),
+    "RHO": ("Rhodos", "Grekland"),
+    "SPU": ("Split", "Kroatien"),
+    "TFS": ("Teneriffa", "Spanien"),
+    "FUE": ("Fuerteventura", "Spanien"),
+    "ACE": ("Lanzarote", "Spanien"),
+    "DLM": ("Dalaman", "Turkiet"),
+    "BJV": ("Bodrum", "Turkiet")
+}
+
 # Maxpriser i SEK
 THRESHOLD_WEEKEND = 1500  # weekend/storstad
 THRESHOLD_LONG = 3500     # längre solresor
@@ -309,6 +331,19 @@ def scrape_ving_lastminute():
                     resort_obj = geo.get("resort") or {}
                     resort_name = resort_obj.get("name") or "Okänt resmål"
                 
+                # Tillämpa IATA-fallback om geografisk information saknas
+                if resort_name == "Okänt resmål" or country_name == "Okänt land":
+                    fallback_info = IATA_FALLBACK.get(destination_code)
+                    if fallback_info:
+                        if resort_name == "Okänt resmål":
+                            resort_name = fallback_info[0]
+                        if country_name == "Okänt land":
+                            country_name = fallback_info[1]
+                    else:
+                        # Fallback till själva IATA-koden om den inte finns i fallback-listan
+                        if resort_name == "Okänt resmål":
+                            resort_name = destination_code
+
                 if offer["type"] == "unspecified":
                     hotel_name = "Ospecificerat boende"
                 
@@ -406,10 +441,23 @@ def scrape_tui_lastminute():
             if price > 5000:
                 continue
                 
-            destination_code = offer.get("hotel", {}).get("geo", {}).get("destinationCode")
+            # Extrahera destination_code robust från flightInfo
+            outbound_flights = offer.get("flightInfo", {}).get("outboundFlights", [])
+            destination_code = None
+            if outbound_flights and isinstance(outbound_flights, list) and len(outbound_flights) > 0:
+                destination_code = outbound_flights[0].get("arrivalAirport")
+            
+            if not destination_code:
+                destination_code = offer.get("hotel", {}).get("geo", {}).get("destinationCode")
+            
             resort_name = offer.get("hotel", {}).get("geo", {}).get("resort", "Okänt resmål")
             country_name = offer.get("hotel", {}).get("geo", {}).get("country", "Okänt land")
             
+            # Om IATA-kod saknas eller är en intern TUI G-kod, använd resort_name som destination
+            display_destination = destination_code
+            if destination_code and destination_code.startswith("G-"):
+                display_destination = resort_name
+                
             departure_date = offer.get("departureDate", offer.get("arrivalDate"))
             duration = int(offer.get("duration", 7))
             
@@ -430,7 +478,7 @@ def scrape_tui_lastminute():
                 "source": "tui",
                 "type": "package",
                 "origin": origin,
-                "destination": destination_code,
+                "destination": display_destination,
                 "destination_name": f"{resort_name} ({country_name})",
                 "price": price,
                 "departure_date": departure_date,
@@ -452,8 +500,103 @@ def scrape_tui_lastminute():
         return []
 
 
+def consolidate_history_blocks(history_list):
+    """Konsoliderar och deduplicerar historiska körningar så att det max finns ett block per datum."""
+    by_date = {}
+    for run in history_list:
+        date = run.get("date")
+        if not date:
+            continue
+        if date not in by_date:
+            by_date[date] = []
+        by_date[date].extend(run.get("flights", []))
+        
+    consolidated = []
+    for date, items in sorted(by_date.items()):
+        # Deduplicera items för detta datum
+        unique_items_dict = {}
+        for item in items:
+            if item["type"] == "flight":
+                key = (
+                    item["origin"], 
+                    item["destination"], 
+                    item["departure_date"], 
+                    item.get("return_date")
+                )
+            else: # package
+                key = (
+                    item["origin"], 
+                    item["destination"], 
+                    item["departure_date"], 
+                    item.get("package_data", {}).get("nights"), 
+                    item.get("package_data", {}).get("hotel_name"), 
+                    item.get("package_data", {}).get("operator")
+                )
+            unique_items_dict[key] = item
+        
+        consolidated.append({
+            "date": date,
+            "flights": list(unique_items_dict.values())
+        })
+    return consolidated
+
+def compute_deal_factor(item, history):
+    """
+    Beräknar deal factor taggar baserat på historiken.
+    Nivå 3: Under 500 kr/natt (alltid tillgänglig för paketresor)
+    Nivå 1: Lägsta pris på 30 dagar för denna rutt
+    Nivå 2: Prissänkning ≥15% mot senaste observerade priset för samma rutt
+    """
+    tags = []
+    price = float(item.get("price", 0))
+    if price <= 0:
+        return tags
+        
+    # Nivå 3: Paketpris per natt
+    if item["type"] == "package":
+        nights = int(item.get("package_data", {}).get("nights", 7))
+        if price / max(1, nights) < 500:
+            tags.append("Under 500 kr/natt!")
+            
+    # Samla historiska priser för denna rutt (sorterat kronologiskt)
+    route_prices = []
+    
+    # history är listan state["history"]
+    # Vi sorterar historiken på datum först
+    sorted_history = sorted(history, key=lambda x: x.get("date", ""))
+    
+    for run in sorted_history:
+        # Undvik att jämföra med dagens egen körning
+        run_date = run.get("date")
+        today_str = datetime.date.today().strftime("%Y-%m-%d")
+        if run_date == today_str:
+            continue
+            
+        for h_item in run.get("flights", []):
+            if h_item["type"] == item["type"] and h_item["origin"] == item["origin"] and h_item["destination"] == item["destination"]:
+                # För paketresor, matcha även antal nätter så vi inte jämför 7 nätter mot 14 nätter
+                if item["type"] == "package":
+                    if h_item.get("package_data", {}).get("nights") != item.get("package_data", {}).get("nights"):
+                        continue
+                route_prices.append(float(h_item["price"]))
+                
+    if route_prices:
+        min_hist = min(route_prices)
+        last_hist = route_prices[-1]
+        
+        # Nivå 1: Historiskt lägsta
+        if price <= min_hist:
+            tags.append("Lägsta pris på 30 dagar!")
+        # Nivå 2: Prissänkning ≥15% mot senaste
+        elif last_hist >= price * 1.15:
+            pct = int((1 - price / last_hist) * 100)
+            tags.append(f"Ned {pct}% sedan senast!")
+            
+    return tags
+
+
 def update_state(new_flights, new_packages=None):
-    """Sparar och ackumulerar historisk flyg- och paketdata i data/price_history.json (max 30 dagar) med strikt deduplicering."""
+    """Sparar och ackumulerar historisk flyg- och paketdata i data/price_history.json (max 30 dagar) med strikt deduplicering och konsolidering."""
     state_file = "data/price_history.json"
     
     if new_packages is None:
@@ -574,28 +717,8 @@ def update_state(new_flights, new_packages=None):
     thirty_days_ago = (datetime.date.today() - datetime.timedelta(days=30)).strftime("%Y-%m-%d")
     state["history"] = [run for run in state["history"] if run["date"] >= thirty_days_ago]
     
-    # Extra deduplicering över hela historiken (för att städa upp eventuella gamla duplikatposter per dag)
-    for run in state["history"]:
-        run_unique_dict = {}
-        for item in run.get("flights", []):
-            if item["type"] == "flight":
-                key = (
-                    item["origin"], 
-                    item["destination"], 
-                    item["departure_date"], 
-                    item["return_date"]
-                )
-            else:
-                key = (
-                    item["origin"], 
-                    item["destination"], 
-                    item["departure_date"], 
-                    item["package_data"]["nights"], 
-                    item["package_data"]["hotel_name"], 
-                    item["package_data"]["operator"]
-                )
-            run_unique_dict[key] = item
-        run["flights"] = list(run_unique_dict.values())
+    # Konsolidera och deduplicera historiken så det max finns ett block per datum (rensar även gamla synder)
+    state["history"] = consolidate_history_blocks(state["history"])
         
     try:
         with open(state_file, "w", encoding="utf-8") as f:
@@ -620,6 +743,9 @@ def generate_html_dashboard(state):
             
             # Injetera unikt ID för frontend (localStorage)
             item["id"] = key
+            
+            # Dynamisk beräkning av deal tags (Nivå 1, 2, 3) baserat på historiken
+            item["tags"] = compute_deal_factor(item, state["history"])
             
             all_items[key] = item # Skriver över med senaste priset och info
             
@@ -1237,6 +1363,23 @@ def generate_html_dashboard(state):
                     badgeHtml = `<span class="brand-badge" style="background: rgba(16, 185, 129, 0.2); color: var(--success); border-color: var(--success);">✈️ Flygstol</span>`;
                 }}
                 
+                // Generera HTML för deal-taggar (historiskt lägsta, prissänkning, pris per natt)
+                let tagsHtml = '';
+                if (f.tags && f.tags.length > 0) {{
+                    tagsHtml = f.tags.map(t => {{
+                        let icon = '🔥';
+                        let style = 'background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3);';
+                        if (t.includes('Ned')) {{
+                            icon = '📉';
+                            style = 'background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3);';
+                        }} else if (t.includes('Lägsta')) {{
+                            icon = '⭐';
+                            style = 'background: rgba(79, 70, 229, 0.2); color: #a5b4fc; border: 1px solid rgba(79, 70, 229, 0.4);';
+                        }}
+                        return `<span class="brand-badge" style="${{style}}">${{icon}} ${{t}}</span>`;
+                    }}).join(' ');
+                }}
+                
                 card.className = `flight-card ${{brandClass}}`;
                 
                 const isSFT = f.origin === 'SFT' ? '⚡ Direkt/Snabbast' : 'Bil/Transfer';
@@ -1305,7 +1448,10 @@ def generate_html_dashboard(state):
                         <div class="action-btn" onclick="toggleFav('${{f.id}}', event)" style="color: ${{favColor}}" title="Markera som favorit">❤️</div>
                         <div class="action-btn" onclick="toggleHide('${{f.id}}', event)" title="${{isHidden ? 'Återställ dolda' : 'Dölj resa'}}">${{hideIcon}}</div>
                     </div>
-                    ${{badgeHtml}}
+                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                        ${{badgeHtml}}
+                        ${{tagsHtml}}
+                    </div>
                     <div>
                         <div class="route-info" style="margin-top: 1.5rem;">
                             <div>
@@ -1396,14 +1542,29 @@ def run_groq_analysis(flights):
     if remaining > 0:
         selected_deals += non_sft_deals[:remaining]
         
+    # Läs historiken för att kunna beräkna deal-taggar för Groq
+    history = []
+    state_file = "data/price_history.json"
+    if os.path.exists(state_file):
+        try:
+            with open(state_file, "r", encoding="utf-8") as hf:
+                state_data = json.load(hf)
+                history = state_data.get("history", [])
+        except Exception:
+            pass
+
     print(f"[Groq Pre-processing] Skickar {len(selected_deals)} utvalda resor av {len(flights)} totalt (SFT: {len([d for d in selected_deals if d.get('origin') == 'SFT'])}, Övriga: {len([d for d in selected_deals if d.get('origin') != 'SFT'])})")
     
     # Förbered kompakt JSON-data för Groq (polymorfiskt säker)
     compact_data = []
     for f in selected_deals:
+        # Beräkna taggar dynamiskt baserat på historiken
+        tags = compute_deal_factor(f, history)
+        tag_str = f" [FYNDFAKTOR: {', '.join(tags)}]" if tags else ""
+        
         if f['type'] == 'flight':
             compact_data.append({
-                "Typ": "Flyg",
+                "Typ": "Flyg" + tag_str,
                 "Rutt": f"{f['origin']}->{f['destination']} ({f['destination_name']})",
                 "Datum": f"{f['departure_date']} till {f['return_date']}",
                 "Pris": f"{f['price']} SEK",
@@ -1412,9 +1573,9 @@ def run_groq_analysis(flights):
             })
         elif f['type'] == 'package':
             compact_data.append({
-                "Typ": f"Paketresa ({f['package_data']['operator']})",
+                "Typ": f"Paketresa ({f['package_data']['operator']})" + tag_str,
                 "Rutt": f"{f['origin']}->{f['destination']} ({f['destination_name']})",
-                "Datum": f"{f['departure_date']} till {f['return_date']} ({f['package_data']['nights']} dagar)",
+                "Datum": f"{f['departure_date']} till {f['return_date']} ({f['package_data']['nights']} nätter)",
                 "Pris": f"{f['price']} SEK",
                 "Boende": f['package_data']['hotel_name']
             })
@@ -1425,9 +1586,10 @@ def run_groq_analysis(flights):
         "av dygnets absolut bästa fynd utifrån den tillhandahållna listan (som redan är sorterad med Skellefteå-fynd först, följt av andra närliggande flygplatser).\n\n"
         "Regler:\n"
         "1. Analysera listan och lyft fram de 2-3 absolut bästa fynden.\n"
-        "2. Skellefteå-fokus: Om det finns ett bra fynd direkt från SFT ska det hyllas först och mest! Om det däremot finns ett enastående fynd från Umeå (UME), Luleå (LLA) eller Arlanda (ARN) som gör att det är värt transfern, nämn det kort.\n"
-        "3. Håll språket personligt, inspirerande men mycket kortfattat (max 140 ord!). Använd korta meningar och punktlistor.\n"
-        "4. Formatera svaret i ren och enkel text så att den lätt kan konverteras till Telegram-Markdown. Undvik komplex HTML."
+        "2. Om en resa har en '[FYNDFAKTOR: ...]'-tagg i sin Typ, ska du utnyttja detta för att förklara VARFÖR det är ett fynd på ett engagerande sätt (t.ex. 'Detta är det lägsta priset vi sett på 30 dagar!' eller 'Boendet kostar under otroliga 500 kr per natt!').\n"
+        "3. Skellefteå-fokus: Om det finns ett bra fynd direkt från SFT ska det hyllas först och mest! Om det däremot finns ett enastående fynd från Umeå (UME), Luleå (LLA) eller Arlanda (ARN) som gör att det är värt transfern, nämn det kort.\n"
+        "4. Håll språket personligt, inspirerande men mycket kortfattat (max 140 ord!). Använd korta meningar och punktlistor.\n"
+        "5. Formatera svaret i ren och enkel text så att den lätt kan konverteras till Telegram-Markdown. Undvik komplex HTML."
     )
     
     data = {
