@@ -547,8 +547,7 @@ def update_state(new_flights, new_packages=None):
                     item["origin"], 
                     item["destination"], 
                     item["departure_date"], 
-                    item["return_date"], 
-                    item["price"]
+                    item["return_date"]
                 )
             else: # package
                 key = (
@@ -557,8 +556,7 @@ def update_state(new_flights, new_packages=None):
                     item["departure_date"], 
                     item["package_data"]["nights"], 
                     item["package_data"]["hotel_name"], 
-                    item["package_data"]["operator"],
-                    item["price"]
+                    item["package_data"]["operator"]
                 )
                 
             if key not in seen_keys:
@@ -588,8 +586,7 @@ def update_state(new_flights, new_packages=None):
                     item["origin"], 
                     item["destination"], 
                     item["departure_date"], 
-                    item["return_date"], 
-                    item["price"]
+                    item["return_date"]
                 )
             else:
                 key = (
@@ -598,8 +595,7 @@ def update_state(new_flights, new_packages=None):
                     item["departure_date"], 
                     item["package_data"]["nights"], 
                     item["package_data"]["hotel_name"], 
-                    item["package_data"]["operator"],
-                    item["price"]
+                    item["package_data"]["operator"]
                 )
             if key not in run_seen:
                 run_seen.add(key)
@@ -626,6 +622,10 @@ def generate_html_dashboard(state):
                 key = f"flight-{item['origin']}-{item['destination']}-{item['departure_date']}-{item['return_date']}"
             else:
                 key = f"package-{item['origin']}-{item['destination']}-{item['departure_date']}-{item['package_data']['hotel_name']}"
+            
+            # Injetera unikt ID för frontend (localStorage)
+            item["id"] = key
+            
             all_items[key] = item # Skriver över med senaste priset och info
             
     items_list = list(all_items.values())
@@ -971,6 +971,107 @@ def generate_html_dashboard(state):
                 box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
             }}
         }}
+
+        /* Mobilanpassad header-stapling */
+        @media (max-width: 768px) {{
+            header {{
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }}
+        }}
+
+        /* Sorterings-, resetyp- och favoritfilter-rader */
+        .filter-row-secondary {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }}
+
+        /* Interaktionsknappar på korten */
+        .card-actions {{
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }}
+        .action-btn {{
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            cursor: pointer;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--text-color);
+        }}
+        .action-btn:hover {{
+            background: rgba(255, 255, 255, 0.1);
+        }}
+
+        /* Basstruktur för dynamic brand-badge */
+        .brand-badge {{
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }}
+
+        /* Varumärkesunika ram-accents och skugg-glows */
+        :root {{
+            --ving-color: var(--accent);
+            --ving-glow: rgba(6, 182, 212, 0.4);
+            --tui-color: #09a0e0;
+            --tui-glow: rgba(9, 160, 224, 0.4);
+            --skyscanner-color: var(--primary);
+            --skyscanner-glow: rgba(79, 70, 229, 0.4);
+        }}
+
+        .flight-card.brand-ving:hover {{
+            border-color: var(--ving-color);
+            box-shadow: 0 10px 25px var(--ving-glow);
+        }}
+        .flight-card.brand-tui:hover {{
+            border-color: var(--tui-color);
+            box-shadow: 0 10px 25px var(--tui-glow);
+        }}
+        .flight-card.brand-skyscanner:hover {{
+            border-color: var(--skyscanner-color);
+            box-shadow: 0 10px 25px var(--skyscanner-glow);
+        }}
+
+        .empty-state {{
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border: 1px dashed var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            margin: 2rem 0;
+        }}
+        .empty-state h2 {{
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }}
+        .empty-state p {{
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }}
     </style>
 </head>
 <body>
@@ -994,13 +1095,35 @@ def generate_html_dashboard(state):
         </div>
 
         <section class="filter-section">
-            <div class="filter-title">Filtrera på avreseort:</div>
-            <div class="filter-bar">
-                <button class="filter-btn active" onclick="filterOrigin('ALL')">Alla avreseorter</button>
-                <button class="filter-btn" onclick="filterOrigin('SFT')">Skellefteå (SFT)</button>
-                <button class="filter-btn" onclick="filterOrigin('UME')">Umeå (UME)</button>
-                <button class="filter-btn" onclick="filterOrigin('LLA')">Luleå (LLA)</button>
-                <button class="filter-btn" onclick="filterOrigin('ARN')">Arlanda (ARN)</button>
+            <div class="filter-title">Filter & Sortering</div>
+            
+            <div class="filter-row-secondary">
+                <div style="font-size: 0.85rem; color: var(--text-muted); width: 100%;">Avreseort:</div>
+                <button class="filter-btn active" data-type="origin" data-value="ALL" onclick="setFilter('origin', 'ALL')">Alla orter</button>
+                <button class="filter-btn" data-type="origin" data-value="SFT" onclick="setFilter('origin', 'SFT')">Skellefteå (SFT)</button>
+                <button class="filter-btn" data-type="origin" data-value="UME" onclick="setFilter('origin', 'UME')">Umeå (UME)</button>
+                <button class="filter-btn" data-type="origin" data-value="LLA" onclick="setFilter('origin', 'LLA')">Luleå (LLA)</button>
+                <button class="filter-btn" data-type="origin" data-value="ARN" onclick="setFilter('origin', 'ARN')">Arlanda (ARN)</button>
+            </div>
+            
+            <div class="filter-row-secondary">
+                <div style="font-size: 0.85rem; color: var(--text-muted); width: 100%;">Resetyp:</div>
+                <button class="filter-btn active" data-type="type" data-value="ALL" onclick="setFilter('type', 'ALL')">Alla typer</button>
+                <button class="filter-btn" data-type="type" data-value="flight" onclick="setFilter('type', 'flight')">Flygstolar ✈️</button>
+                <button class="filter-btn" data-type="type" data-value="package" onclick="setFilter('type', 'package')">Paketresor 🌴</button>
+            </div>
+
+            <div class="filter-row-secondary">
+                <div style="font-size: 0.85rem; color: var(--text-muted); width: 100%;">Sortering:</div>
+                <button class="filter-btn active" data-type="sort" data-value="price" onclick="setFilter('sort', 'price')">💰 Pris</button>
+                <button class="filter-btn" data-type="sort" data-value="date" onclick="setFilter('sort', 'date')">📅 Datum</button>
+                <button class="filter-btn" data-type="sort" data-value="duration" onclick="setFilter('sort', 'duration')">⏳ Längd</button>
+            </div>
+            
+            <div class="filter-row-secondary" style="margin-top: 1.5rem;">
+                <div style="font-size: 0.85rem; color: var(--text-muted); width: 100%;">Personliga val:</div>
+                <button class="filter-btn" data-type="fav" data-value="true" onclick="setFilter('fav', 'true')" style="border-color: #ef4444;">❤️ Visa endast stjärnmärkta</button>
+                <button class="filter-btn" data-type="hidden" data-value="true" onclick="setFilter('hidden', 'true')">👁️ Visa dolda resor</button>
             </div>
         </section>
 
@@ -1012,150 +1135,209 @@ def generate_html_dashboard(state):
     <script>
         const flights = {json.dumps(items_list, ensure_ascii=False)};
         let activeOrigin = 'ALL';
+        let activeType = 'ALL';
+        let activeSort = 'price';
+        let showFavoritesOnly = false;
+        let showHidden = false;
+
+        function toggleFav(id, event) {{
+            event.preventDefault();
+            let favs = JSON.parse(localStorage.getItem('travel_favs') || '[]');
+            if (favs.includes(id)) {{
+                favs = favs.filter(x => x !== id);
+            }} else {{
+                favs.push(id);
+            }}
+            localStorage.setItem('travel_favs', JSON.stringify(favs));
+            renderFlights();
+        }}
+
+        function toggleHide(id, event) {{
+            event.preventDefault();
+            let hidden = JSON.parse(localStorage.getItem('travel_hidden') || '[]');
+            if (hidden.includes(id)) {{
+                hidden = hidden.filter(x => x !== id);
+            }} else {{
+                hidden.push(id);
+            }}
+            localStorage.setItem('travel_hidden', JSON.stringify(hidden));
+            renderFlights();
+        }}
+
+        function setFilter(type, value) {{
+            if (type === 'origin') activeOrigin = value;
+            if (type === 'type') activeType = value;
+            if (type === 'sort') activeSort = value;
+            if (type === 'fav') showFavoritesOnly = !showFavoritesOnly;
+            if (type === 'hidden') showHidden = !showHidden;
+            
+            // Uppdatera UI state för knappar
+            document.querySelectorAll('.filter-btn').forEach(btn => {{
+                const btnType = btn.dataset.type;
+                const btnVal = btn.dataset.value;
+                if (btnType === type) {{
+                    if (['fav', 'hidden'].includes(btnType)) {{
+                        btn.classList.toggle('active', type === 'fav' ? showFavoritesOnly : showHidden);
+                    }} else {{
+                        btn.classList.toggle('active', btnVal === value);
+                    }}
+                }}
+            }});
+            
+            renderFlights();
+        }}
 
         function renderFlights() {{
             const grid = document.getElementById('flightGrid');
             grid.innerHTML = '';
             
-            const filtered = flights.filter(f => activeOrigin === 'ALL' || f.origin === activeOrigin);
+            const favs = JSON.parse(localStorage.getItem('travel_favs') || '[]');
+            const hidden = JSON.parse(localStorage.getItem('travel_hidden') || '[]');
+            
+            let filtered = flights.filter(f => {{
+                const matchOrigin = activeOrigin === 'ALL' || f.origin === activeOrigin;
+                const matchType = activeType === 'ALL' || f.type === activeType;
+                const matchHidden = showHidden ? hidden.includes(f.id) : !hidden.includes(f.id);
+                const matchFav = showFavoritesOnly ? favs.includes(f.id) : true;
+                
+                return matchOrigin && matchType && matchHidden && matchFav;
+            }});
             
             if (filtered.length === 0) {{
                 grid.innerHTML = `
                     <div class="empty-state">
-                        <h2>Inga resor hittades under gränsvärdena för detta filter just nu.</h2>
-                        <p>Bevakningen fortsätter dagligen för att hitta nya prissänkningar!</p>
+                        <h2>Inga resor hittades för dina valda filter.</h2>
+                        <p>Kanske har du dolt dem alla, eller så finns det inga erbjudanden för denna kombination just nu.</p>
                     </div>
                 `;
                 return;
             }}
 
-            // Sortera efter pris (billigast först)
-            filtered.sort((a, b) => a.price - b.price);
+            // Sortering
+            filtered.sort((a, b) => {{
+                if (activeSort === 'price') return a.price - b.price;
+                if (activeSort === 'date') return new Date(a.departure_date) - new Date(b.departure_date);
+                if (activeSort === 'duration') {{
+                    const durA = a.type === 'flight' ? (a.flight_data && a.flight_data.duration ? a.flight_data.duration : 0) : (a.package_data && a.package_data.nights ? a.package_data.nights : 0);
+                    const durB = b.type === 'flight' ? (b.flight_data && b.flight_data.duration ? b.flight_data.duration : 0) : (b.package_data && b.package_data.nights ? b.package_data.nights : 0);
+                    return durA - durB;
+                }}
+                return 0;
+            }});
 
             filtered.forEach(f => {{
                 const card = document.createElement('div');
-                card.className = 'flight-card';
+                const isFav = favs.includes(f.id);
+                const isHidden = hidden.includes(f.id);
+                
+                let brandClass = '';
+                let badgeHtml = '';
+                if (f.type === 'package') {{
+                    const operator = f.package_data.operator.toLowerCase();
+                    if (operator === 'ving') brandClass = 'brand-ving';
+                    else if (operator === 'tui') brandClass = 'brand-tui';
+                    badgeHtml = `<span class="brand-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent); border-color: var(--accent);">🌴 Paketresa (${{f.package_data.operator}})</span>`;
+                }} else {{
+                    brandClass = 'brand-skyscanner';
+                    badgeHtml = `<span class="brand-badge" style="background: rgba(16, 185, 129, 0.2); color: var(--success); border-color: var(--success);">✈️ Flygstol</span>`;
+                }}
+                
+                card.className = `flight-card ${{brandClass}}`;
                 
                 const isSFT = f.origin === 'SFT' ? '⚡ Direkt/Snabbast' : 'Bil/Transfer';
                 
+                const favColor = isFav ? '#ef4444' : 'var(--text-color)';
+                const hideIcon = isHidden ? '👁️' : '❌';
+                
+                let detailsHtml = '';
                 if (f.type === 'flight') {{
                     const bagText = f.flight_data.baggage_included ? '🎒 Incheckat bagage ingår' : '⚠️ Endast handbagage';
                     const bagClass = f.flight_data.baggage_included ? 'yes' : 'no';
-                    
-                    card.innerHTML = `
-                        <span class="card-badge">${{isSFT}}</span>
-                        <div>
-                            <div class="route-info">
-                                <div>
-                                    <div class="route-code">${{f.origin}}</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Utresa</div>
-                                </div>
-                                <div class="route-arrow">➔</div>
-                                <div>
-                                    <div class="route-code">${{f.destination}}</div>
-                                    <div class="destination-name">${{f.destination_name}}</div>
-                                </div>
-                            </div>
-
-                            <div class="price-section">
-                                <span class="price-val">${{Math.round(f.price).toLocaleString('sv-SE')}}</span>
-                                <span class="price-currency">SEK</span>
-                            </div>
-
-                            <div class="flight-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Utresa:</span>
-                                    <span class="detail-val">${{f.departure_date}} (${{f.flight_data.departure_time}})</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Hemresa:</span>
-                                    <span class="detail-val">${{f.return_date}} (${{f.flight_data.return_time}})</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Byten (Ut/Hem):</span>
-                                    <span class="detail-val">${{f.flight_data.outbound_stops}} / ${{f.flight_data.inbound_stops}}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Aktör:</span>
-                                    <span class="detail-val">${{f.flight_data.carrier}}</span>
-                                </div>
-                                <span class="baggage-badge ${{bagClass}}">${{bagText}}</span>
-                            </div>
+                    detailsHtml = `
+                        <div class="detail-row">
+                            <span class="detail-label">Utresa:</span>
+                            <span class="detail-val">${{f.departure_date}} (${{f.flight_data.departure_time}})</span>
                         </div>
-                        <a href="${{f.deep_link}}" target="_blank" rel="noopener noreferrer" class="book-btn">Sök på Skyscanner</a>
+                        <div class="detail-row">
+                            <span class="detail-label">Hemresa:</span>
+                            <span class="detail-val">${{f.return_date}} (${{f.flight_data.return_time}})</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Byten (Ut/Hem):</span>
+                            <span class="detail-val">${{f.flight_data.outbound_stops}} / ${{f.flight_data.inbound_stops}}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Aktör:</span>
+                            <span class="detail-val">${{f.flight_data.carrier}}</span>
+                        </div>
+                        <span class="baggage-badge ${{bagClass}}">${{bagText}}</span>
                     `;
-                }} else if (f.type === 'package') {{
-                    const isTUI = f.package_data.operator === 'TUI';
-                    const btnText = isTUI ? 'Boka hos TUI' : 'Boka hos Ving';
-                    const btnStyle = isTUI 
-                        ? 'background: linear-gradient(135deg, #09a0e0, #0284c7); box-shadow: 0 4px 12px rgba(9, 160, 224, 0.4);' 
-                        : 'background: linear-gradient(135deg, var(--accent), #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);';
-                        
-                    card.innerHTML = `
-                        <span class="card-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent); border-color: var(--accent);">🌴 Paketresa (Flyg+Hotell)</span>
-                        <div>
-                            <div class="route-info">
-                                <div>
-                                    <div class="route-code">${{f.origin}}</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Utresa</div>
-                                </div>
-                                <div class="route-arrow">➔</div>
-                                <div>
-                                    <div class="route-code">${{f.destination}}</div>
-                                    <div class="destination-name">${{f.destination_name}}</div>
-                                </div>
-                            </div>
-
-                            <div class="price-section">
-                                <span class="price-val">${{Math.round(f.price).toLocaleString('sv-SE')}}</span>
-                                <span class="price-currency">SEK</span>
-                            </div>
-
-                            <div class="flight-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Boende:</span>
-                                    <span class="detail-val" style="color: #fff; font-weight: 600;">${{f.package_data.hotel_name}}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Reslängd:</span>
-                                    <span class="detail-val">${{f.package_data.nights}} dagar</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Utresa:</span>
-                                    <span class="detail-val">${{f.departure_date}}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Hemresa:</span>
-                                    <span class="detail-val">${{f.return_date}}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Arrangör:</span>
-                                    <span class="detail-val" style="color: var(--warning); font-weight: 600;">${{f.package_data.operator}}</span>
-                                </div>
-                            </div>
+                }} else {{
+                    detailsHtml = `
+                        <div class="detail-row">
+                            <span class="detail-label">Boende:</span>
+                            <span class="detail-val" style="color: #fff; font-weight: 600;">${{f.package_data.hotel_name}}</span>
                         </div>
-                        <a href="${{f.deep_link}}" target="_blank" rel="noopener noreferrer" class="book-btn" style="${{btnStyle}}">${{btnText}}</a>
+                        <div class="detail-row">
+                            <span class="detail-label">Reslängd:</span>
+                            <span class="detail-val">${{f.package_data.nights}} dagar</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Utresa:</span>
+                            <span class="detail-val">${{f.departure_date}}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Hemresa:</span>
+                            <span class="detail-val">${{f.return_date}}</span>
+                        </div>
                     `;
                 }}
                 
+                let btnText = 'Boka nu';
+                let btnStyle = 'background: linear-gradient(135deg, var(--primary), #3b82f6); box-shadow: 0 4px 12px var(--primary-glow);';
+                if (f.type === 'package') {{
+                    if (f.package_data.operator === 'TUI') {{
+                        btnText = 'Boka hos TUI';
+                        btnStyle = 'background: linear-gradient(135deg, #09a0e0, #0284c7); box-shadow: 0 4px 12px rgba(9, 160, 224, 0.4);';
+                    }} else {{
+                        btnText = 'Boka hos Ving';
+                        btnStyle = 'background: linear-gradient(135deg, var(--accent), #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);';
+                    }}
+                }}
+
+                card.innerHTML = `
+                    <div class="card-actions">
+                        <div class="action-btn" onclick="toggleFav('${{f.id}}', event)" style="color: ${{favColor}}" title="Markera som favorit">❤️</div>
+                        <div class="action-btn" onclick="toggleHide('${{f.id}}', event)" title="${{isHidden ? 'Återställ dolda' : 'Dölj resa'}}">${{hideIcon}}</div>
+                    </div>
+                    ${{badgeHtml}}
+                    <div>
+                        <div class="route-info" style="margin-top: 1.5rem;">
+                            <div>
+                                <div class="route-code">${{f.origin}}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Utresa</div>
+                            </div>
+                            <div class="route-arrow">➔</div>
+                            <div>
+                                <div class="route-code">${{f.destination}}</div>
+                                <div class="destination-name">${{f.destination_name}}</div>
+                            </div>
+                        </div>
+
+                        <div class="price-section">
+                            <span class="price-val">${{Math.round(f.price).toLocaleString('sv-SE')}}</span>
+                            <span class="price-currency">SEK</span>
+                        </div>
+
+                        <div class="flight-details">
+                            ${{detailsHtml}}
+                        </div>
+                    </div>
+                    <a href="${{f.deep_link}}" target="_blank" rel="noopener noreferrer" class="book-btn" style="${{btnStyle}}">${{btnText}}</a>
+                `;
+                
                 grid.appendChild(card);
             }});
-        }}
-
-        function filterOrigin(origin) {{
-            activeOrigin = origin;
-            
-            // Uppdatera knappar
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {{
-                if (btn.textContent.includes(origin) || (origin === 'ALL' && btn.textContent.includes('Alla'))) {{
-                    btn.classList.add('active');
-                }} else {{
-                    btn.classList.remove('active');
-                }}
-            }});
-            
-            renderFlights();
         }}
 
         // Initial rendering

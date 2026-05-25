@@ -5752,6 +5752,240 @@
             "nights": 8,
             "operator": "Ving"
           }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LPA",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 3920.0,
+          "departure_date": "2026-05-27",
+          "return_date": "2026-06-04",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LPA&QueryDepDate=20260527&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CURA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 3015.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 4880.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-13",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260529&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 15,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "SPU",
+          "destination_name": "Santa Ponsa (Spanien)",
+          "price": 3115.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=SPU&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PUTN&QueryResID=256&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "TRH Jardin del Mar",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "JSI",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 2595.0,
+          "departure_date": "2026-05-31",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=JSI&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ARIA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "JSI",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 4445.0,
+          "departure_date": "2026-05-31",
+          "return_date": "2026-06-15",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=JSI&QueryDepDate=20260531&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ARIA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 15,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 2310.0,
+          "departure_date": "2026-06-03",
+          "return_date": "2026-06-11",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260603&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HELA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 3620.0,
+          "departure_date": "2026-06-05",
+          "return_date": "2026-06-13",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CARA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 3015.0,
+          "departure_date": "2026-06-05",
+          "return_date": "2026-06-13",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PAVL&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "CHQ",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 3520.0,
+          "departure_date": "2026-06-06",
+          "return_date": "2026-06-14",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PROI&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 4575.0,
+          "departure_date": "2026-06-07",
+          "return_date": "2026-06-22",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260607&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HELA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 15,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Okänt resmål (Okänt land)",
+          "price": 2865.0,
+          "departure_date": "2026-06-07",
+          "return_date": "2026-06-15",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260607&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=HELA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "GZP",
+          "destination_name": "Alanya (Turkiet)",
+          "price": 4475.0,
+          "departure_date": "2026-06-14",
+          "return_date": "2026-06-22",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260614&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ATAP&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Atak Apart Hotel",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
         }
       ]
     }
