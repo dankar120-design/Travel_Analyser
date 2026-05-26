@@ -6583,7 +6583,7 @@
           "origin": "ARN",
           "destination": "LPA",
           "destination_name": "San Agustin (Spanien)",
-          "price": 4175.0,
+          "price": 4075.0,
           "departure_date": "2026-06-10",
           "return_date": "2026-06-18",
           "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LPA&QueryDepDate=20260610&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=NORC&QueryResID=302&QueryCtryID=65&QueryAreaID=108&QueryDepID=2788&SelectedSerNo=31",
@@ -6709,7 +6709,7 @@
           "origin": "ARN",
           "destination": "CHQ",
           "destination_name": "Chaniakusten, Kolimbari (Grekland)",
-          "price": 4325.0,
+          "price": 4175.0,
           "departure_date": "2026-06-13",
           "return_date": "2026-06-21",
           "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260613&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
@@ -7817,6 +7817,366 @@
             "stars": 3,
             "nights": 7,
             "operator": "TUI"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LPA",
+          "destination_name": "Gran Canaria (Spanien)",
+          "price": 4225.0,
+          "departure_date": "2026-05-27",
+          "return_date": "2026-06-04",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LPA&QueryDepDate=20260527&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GREL&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "SPU",
+          "destination_name": "Split (Kroatien)",
+          "price": 3470.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=SPU&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=VIPA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Can Picafort (Spanien)",
+          "price": 4475.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260529&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CAPF&QueryResID=262&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "BQ Can Picafort",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Ayia Napa (Cypern)",
+          "price": 4040.0,
+          "departure_date": "2026-05-29",
+          "return_date": "2026-06-02",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260529&QueryDur=4&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ANON&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Anonymous Beach Hotel",
+            "stars": null,
+            "nights": 4,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PVK",
+          "destination_name": "Preveza/Lefkas (Grekland)",
+          "price": 3270.0,
+          "departure_date": "2026-05-30",
+          "return_date": "2026-06-07",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PVK&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=VIVA&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "CHQ",
+          "destination_name": "Chania (Grekland)",
+          "price": 2865.0,
+          "departure_date": "2026-05-30",
+          "return_date": "2026-06-07",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=PROI&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "CHQ",
+          "destination_name": "Chaniakusten, Kolimbari (Grekland)",
+          "price": 4375.0,
+          "departure_date": "2026-05-30",
+          "return_date": "2026-06-14",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=CHQ&QueryDepDate=20260530&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=ALIS&QueryResID=371&QueryCtryID=32&QueryAreaID=99&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Michalis Apartments",
+            "stars": null,
+            "nights": 15,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Palma stad (Spanien)",
+          "price": 4275.0,
+          "departure_date": "2026-05-30",
+          "return_date": "2026-06-03",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260530&QueryDur=4&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=FELI&QueryResID=313&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Feliz",
+            "stars": null,
+            "nights": 4,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "AYT",
+          "destination_name": "Alanya/Antalya (Turkiet)",
+          "price": 4125.0,
+          "departure_date": "2026-05-30",
+          "return_date": "2026-06-07",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260530&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Rhodos (Grekland)",
+          "price": 2615.0,
+          "departure_date": "2026-05-31",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260531&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DIMI&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Rhodos (Grekland)",
+          "price": 2765.0,
+          "departure_date": "2026-06-03",
+          "return_date": "2026-06-11",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260603&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DIMI&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "KGS",
+          "destination_name": "Telendos (Grekland)",
+          "price": 4625.0,
+          "departure_date": "2026-06-05",
+          "return_date": "2026-06-13",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=KGS&QueryDepDate=20260605&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=VILM&QueryResID=13344&QueryCtryID=32&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Villa Maria",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "AYT",
+          "destination_name": "Alanya/Antalya (Turkiet)",
+          "price": 3520.0,
+          "departure_date": "2026-06-06",
+          "return_date": "2026-06-14",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=AYT&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=THES&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "KVA",
+          "destination_name": "Thassos stad (Grekland)",
+          "price": 2765.0,
+          "departure_date": "2026-06-06",
+          "return_date": "2026-06-14",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=KVA&QueryDepDate=20260606&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GAST&QueryResID=77372&QueryCtryID=32&QueryAreaID=77371&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Garden Studios Thassos Town",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Rhodos (Grekland)",
+          "price": 3215.0,
+          "departure_date": "2026-06-07",
+          "return_date": "2026-06-15",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260607&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=DIMI&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "GZP",
+          "destination_name": "Alanya (Turkiet)",
+          "price": 4175.0,
+          "departure_date": "2026-06-07",
+          "return_date": "2026-06-15",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260607&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=BOUG&QueryResID=-1&QueryCtryID=-1&QueryAreaID=-1&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Specified boende",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Ayia Napa (Cypern)",
+          "price": 3720.0,
+          "departure_date": "2026-06-08",
+          "return_date": "2026-06-16",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LCA&QueryDepDate=20260608&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=CHRI&QueryResID=319&QueryCtryID=22&QueryAreaID=89600&QueryDepID=2788&SelectedSerNo=11",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Christabelle",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "RHO",
+          "destination_name": "Rhodos stad (Grekland)",
+          "price": 4325.0,
+          "departure_date": "2026-06-10",
+          "return_date": "2026-06-25",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=RHO&QueryDepDate=20260610&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GREC&QueryResID=203&QueryCtryID=32&QueryAreaID=139&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "El Greco",
+            "stars": null,
+            "nights": 15,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "GZP",
+          "destination_name": "Alanya (Turkiet)",
+          "price": 4625.0,
+          "departure_date": "2026-06-21",
+          "return_date": "2026-06-29",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=GZP&QueryDepDate=20260621&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SAPA&QueryResID=299&QueryCtryID=71&QueryAreaID=32383&QueryDepID=2788&SelectedSerNo=71",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sailor Apart",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "KVA",
+          "destination_name": "Thassos stad (Grekland)",
+          "price": 4525.0,
+          "departure_date": "2026-08-22",
+          "return_date": "2026-08-30",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=KVA&QueryDepDate=20260822&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=GAST&QueryResID=77372&QueryCtryID=32&QueryAreaID=77371&QueryDepID=2788&SelectedSerNo=61",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Garden Studios Thassos Town",
+            "stars": null,
+            "nights": 8,
+            "operator": "Ving"
           }
         }
       ]
