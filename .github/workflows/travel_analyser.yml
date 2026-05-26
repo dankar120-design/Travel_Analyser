@@ -4,8 +4,8 @@ on:
   push:
     branches: [ main ]
   schedule:
-    # Kör varje morgon kl 08:00 UTC (09:00 eller 10:00 svensk tid)
-    - cron: '0 8 * * *'
+    # Kör morgon kl 07:17 UTC och kväll kl 18:17 UTC (anpassat för att undvika heltimmar)
+    - cron: '17 7,18 * * *'
   workflow_dispatch:
     # Tillåter manuell körning från GitHub UI
 

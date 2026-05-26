@@ -682,6 +682,7 @@ def update_state(new_flights, new_packages=None):
         run["flights"] = migrated_items
 
     today_str = datetime.date.today().strftime("%Y-%m-%d")
+    state_improved = False
     
     # Förbered dagens körning och gör en strikt deduplicering av dagens skörd
     if all_new_items:
@@ -691,13 +692,32 @@ def update_state(new_flights, new_packages=None):
                 today_run = run
                 break
                 
+        existing_today = {}
         if today_run is not None:
             combined_items = today_run.get("flights", []) + all_new_items
+            # Kartlägg priser för existerande fynd idag innan vi slår samman och deduplicerar
+            for item in today_run.get("flights", []):
+                if item["type"] == "flight":
+                    key = (
+                        item["origin"], 
+                        item["destination"], 
+                        item["departure_date"], 
+                        item["return_date"]
+                    )
+                else: # package
+                    key = (
+                        item["origin"], 
+                        item["destination"], 
+                        item["departure_date"], 
+                        item["package_data"]["nights"], 
+                        item["package_data"]["hotel_name"], 
+                        item["package_data"]["operator"]
+                    )
+                existing_today[key] = item["price"]
         else:
             combined_items = all_new_items
 
         unique_items_dict = {}
-        
         for item in combined_items:
             if item["type"] == "flight":
                 key = (
@@ -715,9 +735,28 @@ def update_state(new_flights, new_packages=None):
                     item["package_data"]["hotel_name"], 
                     item["package_data"]["operator"]
                 )
-            unique_items_dict[key] = item
+            
+            # Spara endast det billigaste priset för samma nyckel idag
+            if key not in unique_items_dict:
+                unique_items_dict[key] = item
+            else:
+                if item["price"] < unique_items_dict[key]["price"]:
+                    unique_items_dict[key] = item
             
         unique_items = list(unique_items_dict.values())
+        
+        # Avgör om state har förbättrats (nya resor eller lägre priser)
+        if not existing_today:
+            # Om ingen körning gjorts idag är all data en förbättring/nyhet
+            state_improved = True
+        else:
+            for key, item in unique_items_dict.items():
+                if key not in existing_today:
+                    state_improved = True
+                    break
+                elif item["price"] < existing_today[key]:
+                    state_improved = True
+                    break
                 
         if today_run is not None:
             today_run["flights"] = unique_items
@@ -741,7 +780,7 @@ def update_state(new_flights, new_packages=None):
     except Exception as e:
         print(f"Fel vid sparning av state-fil: {e}")
         
-    return state
+    return state, state_improved
 
 def generate_html_dashboard(state):
     """Genererar en premium och visuellt slående dashboard (index.html)."""
@@ -1720,72 +1759,83 @@ def main():
         
     all_found_flights = []
     
-    # 3. Sök igenom flyg (Matris loop)
-    for origin in origins:
-        for dest in DESTINATIONS.keys():
-            # Begränsa antalet datum i Sandbox för att inte få 429
-            # Vi söker de 6 närmsta helgerna för normal skanning, och alla om det är --deep
-            dates_to_search = search_dates if (is_deep or len(origins) == 1) else search_dates[:6]
-            
-            print(f"Söker flyg: {origin} -> {dest} för {len(dates_to_search)} olika datumfönster...")
-            circuit_breaker_active = False
-            for date_window in dates_to_search:
+    # Kolla om detta är en kvällskörning (UTC >= 12)
+    is_evening = datetime.datetime.utcnow().hour >= 12
+    
+    if is_evening:
+        print("\n=== KVÄLLSKÖRNING DETEKTERAD (UTC >= 12) ===")
+        print("Skippar Travelpayouts flygsökning för att spara API rate limits. Endast paketresor (Ving/TUI) skrapas.")
+    else:
+        # 3. Sök igenom flyg (Matris loop)
+        for origin in origins:
+            for dest in DESTINATIONS.keys():
+                # Begränsa antalet datum i Sandbox för att inte få 429
+                # Vi söker de 6 närmsta helgerna för normal skanning, och alla om det är --deep
+                dates_to_search = search_dates if (is_deep or len(origins) == 1) else search_dates[:6]
+                
+                print(f"Söker flyg: {origin} -> {dest} för {len(dates_to_search)} olika datumfönster...")
+                circuit_breaker_active = False
+                for date_window in dates_to_search:
+                    if circuit_breaker_active:
+                        break
+
+                    offers = search_flight(
+                        token, 
+                        origin, 
+                        dest, 
+                        date_window["departure"], 
+                        date_window["return"]
+                    )
+                    
+                    if offers == RATE_LIMITED:
+                        print("Circuit breaker flyg aktiverad. Pausar 60 sekunder...")
+                        time.sleep(60)
+                        # Försök en gång till
+                        offers = search_flight(
+                            token, origin, dest, date_window["departure"], date_window["return"]
+                        )
+                        if offers == RATE_LIMITED:
+                            print("Fortfarande rate-limitad! Bryter API-skanningen.")
+                            circuit_breaker_active = True
+                            break
+                    
+                    if offers and offers != RATE_LIMITED:
+                        parsed = parse_flights(offers, origin, dest, date_window["type"])
+                        if parsed:
+                            all_found_flights.extend(parsed)
+                            print(f"  Hittade {len(parsed)} st flyg under tröskelvärdena!")
+                    
+                    # Liten paus för att undvika rate limits
+                    time.sleep(0.5)
+                
                 if circuit_breaker_active:
                     break
-
-                offers = search_flight(
-                    token, 
-                    origin, 
-                    dest, 
-                    date_window["departure"], 
-                    date_window["return"]
-                )
-                
-                if offers == RATE_LIMITED:
-                    print("Circuit breaker flyg aktiverad. Pausar 60 sekunder...")
-                    time.sleep(60)
-                    # Försök en gång till
-                    offers = search_flight(
-                        token, origin, dest, date_window["departure"], date_window["return"]
-                    )
-                    if offers == RATE_LIMITED:
-                        print("Fortfarande rate-limitad! Bryter API-skanningen.")
-                        circuit_breaker_active = True
-                        break
-                
-                if offers and offers != RATE_LIMITED:
-                    parsed = parse_flights(offers, origin, dest, date_window["type"])
-                    if parsed:
-                        all_found_flights.extend(parsed)
-                        print(f"  Hittade {len(parsed)} st flyg under tröskelvärdena!")
-                
-                # Liten paus för att undvika rate limits
-                time.sleep(0.5)
             
             if circuit_breaker_active:
                 break
-        
-        if circuit_breaker_active:
-            break
 
-    print(f"Flygskanning klar! Hittade totalt {len(all_found_flights)} st intressanta flyg.")
+        print(f"Flygskanning klar! Hittade totalt {len(all_found_flights)} st intressanta flyg.")
     
     # 4. Spara till state och generera dashboard (både flyg och paket)
-    state = update_state(all_found_flights, ving_packages + tui_packages)
+    state, state_improved = update_state(all_found_flights, ving_packages + tui_packages)
     generate_html_dashboard(state)
     
     # Kombinera dagens skörd för Groq AI-Analys
     dagens_skord = all_found_flights + ving_packages + tui_packages
     
     # 5. Groq AI-Analys (Bulletin)
-    if is_deep:
-        print("\n=== GENERERAR DJUPANALYS LOKALT ===")
-        bulletin = run_groq_analysis(dagens_skord)
-        print(bulletin)
+    if is_evening and not state_improved:
+        print("\n=== INGA NYA FYND ELLER LÄGRE PRISER DETEKTERADE ===")
+        print("Skippar Groq AI-analys och Telegram-utskick för att undvika spam under kvällskörningen.")
     else:
-        # Standard workflow: kort morgonbulletin + Telegram
-        bulletin = run_groq_analysis(dagens_skord)
-        send_telegram_message(bulletin)
+        if is_deep:
+            print("\n=== GENERERAR DJUPANALYS LOKALT ===")
+            bulletin = run_groq_analysis(dagens_skord)
+            print(bulletin)
+        else:
+            # Standard workflow: kort morgonbulletin + Telegram
+            bulletin = run_groq_analysis(dagens_skord)
+            send_telegram_message(bulletin)
 
 if __name__ == "__main__":
     main()
