@@ -798,12 +798,23 @@ def generate_html_dashboard(state):
             # Injetera unikt ID för frontend (localStorage)
             item["id"] = key
             
+            # Spara datumet resan senast observerades
+            item["last_seen_date"] = run["date"]
+            
             # Dynamisk beräkning av deal tags (Nivå 1, 2, 3) baserat på historiken
             item["tags"] = compute_deal_factor(item, state["history"])
             
             all_items[key] = item # Skriver över med senaste priset och info
             
-    items_list = list(all_items.values())
+    # Beräkna färskhetsdatum relativt till senaste faktiska körningen i historiken
+    if state.get("history"):
+        latest_run_date = max(run["date"] for run in state["history"])
+        cutoff_date = (datetime.datetime.strptime(latest_run_date, "%Y-%m-%d") - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+    else:
+        cutoff_date = (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+    
+    # Filtrera på färskhet: visa endast resor som senast sågs vid senaste körningen eller dagen innan
+    items_list = [item for item in all_items.values() if item.get("last_seen_date", "") >= cutoff_date]
     
     # HTML-mall med modern glassmorphism styling och polymorfiska kort
     html_content = f"""<!DOCTYPE html>
@@ -1071,6 +1082,14 @@ def generate_html_dashboard(state):
         .book-btn:hover {{
             background: linear-gradient(135deg, #5a52ff, #4f87ff);
             box-shadow: 0 6px 18px var(--primary-glow);
+        }}
+
+        .last-seen-badge {{
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 0.75rem;
+            opacity: 0.85;
         }}
 
         .empty-state {{
@@ -1539,6 +1558,7 @@ def generate_html_dashboard(state):
                             ${{detailsHtml}}
                         </div>
                     </div>
+                    <div class="last-seen-badge">Pris uppdaterat: ${{f.last_seen_date || ''}}</div>
                     <a href="${{f.deep_link}}" target="_blank" rel="noopener noreferrer" class="book-btn" style="${{btnStyle}}">${{btnText}}</a>
                 `;
                 
@@ -1759,8 +1779,9 @@ def main():
         
     all_found_flights = []
     
-    # Kolla om detta är en kvällskörning (UTC >= 12)
-    is_evening = datetime.datetime.utcnow().hour >= 12
+    # Kolla om detta är en kvällskörning (miljövariabelbaserat för att vara immunt mot cron-förseningar)
+    run_mode = os.environ.get("RUN_MODE", "morning")
+    is_evening = (run_mode == "evening")
     
     if is_evening:
         print("\n=== KVÄLLSKÖRNING DETEKTERAD (UTC >= 12) ===")
