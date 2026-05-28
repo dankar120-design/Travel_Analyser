@@ -497,6 +497,8 @@ def scrape_tui_lastminute():
             except Exception as e:
                 print(f"Kunde inte läsa hotel_ratings.json för TUI: {e}")
         
+        new_unknown_tui_hotels = set()
+        
         for offer in offers:
             origin = offer.get("departureAirport", {}).get("code")
             if origin not in allowed_origins:
@@ -504,7 +506,7 @@ def scrape_tui_lastminute():
                 
             price = float(offer.get("pricePerPerson", {}).get("amount", 0))
             
-            hotel_name = offer.get("hotel", {}).get("name", "Ospecificerat boende")
+            hotel_name = offer.get("hotel", {}).get("name", "Ospecificerat boende").strip()
             if "ospecificerat" in hotel_name.lower() or "unspecified" in hotel_name.lower() or hotel_name == "Ospecificerat boende":
                 continue
 
@@ -523,6 +525,7 @@ def scrape_tui_lastminute():
                 if stars_val < 3.8:
                     continue
             else:
+                new_unknown_tui_hotels.add(hotel_name)
                 stars_val = tui_rating_val
                 if stars_val < 4.0:
                     continue
@@ -585,6 +588,17 @@ def scrape_tui_lastminute():
                     "operator": "TUI"
                 }
             })
+            
+        # Spara alla okända TUI-hotell i en diskoppdatering med GC-funktionalitet ("w"-läge)
+        if new_unknown_tui_hotels:
+            unknown_tui_file = "data/unknown_hotels_tui.json"
+            try:
+                with open(unknown_tui_file, "w", encoding="utf-8") as uf:
+                    json.dump(sorted(list(new_unknown_tui_hotels)), uf, indent=2, ensure_ascii=False)
+            except Exception as e:
+                print(f"Kunde inte skriva till unknown_hotels_tui: {e}")
+            
+            print(f"[VARNING] {len(new_unknown_tui_hotels)} st okända TUI-hotell saknade cachebetyg och har loggats i {unknown_tui_file}")
             
         print(f"Hittade {len(parsed_packages)} st TUI-paket under tröskelvärdet!")
         return parsed_packages
@@ -899,6 +913,16 @@ def generate_html_dashboard(state):
         except Exception:
             pass
 
+    # Läs in vår lokala betygscache för realtids-exkludering av blockerade hotell (< 3.8 betyg)
+    ratings_cache = {}
+    rating_file = "data/hotel_ratings.json"
+    if os.path.exists(rating_file):
+        try:
+            with open(rating_file, "r", encoding="utf-8") as rf:
+                ratings_cache = json.load(rf)
+        except Exception:
+            pass
+
     # Samla alla unika flyg och paket från de senaste dagarna till dashboarden
     all_items = {}
     
@@ -933,6 +957,7 @@ def generate_html_dashboard(state):
         item for item in all_items.values() 
         if item.get("last_seen_date", "") >= cutoff_date 
         and (item.get("package_data") or {}).get("hotel_name", "") not in unknown_hotels
+        and ratings_cache.get((item.get("package_data") or {}).get("hotel_name", "").strip(), 5.0) >= 3.8
     ]
     
     # HTML-mall med modern glassmorphism styling och polymorfiska kort
