@@ -221,7 +221,8 @@ def parse_flights(flight_offers, origin, destination, trip_type):
 def scrape_ving_lastminute():
     """
     Hämtar sista-minuten-paketresor direkt från Vings GraphQL-gränssnitt.
-    Filtrerar priser upp till 5000 kr för boende (specified/unspecified).
+    Filtrerar priser upp till 9000 kr för premiumboende, kastar bort ospecificerat och rating < 3.8.
+    Använder en lokal cache (data/hotel_ratings.json) för hotellbetyg.
     """
     print("Söker efter Ving sista-minuten-paketresor...")
     url = "https://origo-sc.nltg.com"
@@ -232,9 +233,22 @@ def scrape_ving_lastminute():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
 
+    # Läs in den lokala betygscachen
+    ratings_cache = {}
+    ratings_file = "data/hotel_ratings.json"
+    if os.path.exists(ratings_file):
+        try:
+            with open(ratings_file, "r", encoding="utf-8") as rf:
+                ratings_cache = json.load(rf)
+        except Exception as e:
+            print(f"Kunde inte läsa betygscache {ratings_file}: {e}")
+
+    # Set för att samla okända hotell under loopen och spara I/O-operationer
+    new_unknown_hotels = set()
+
     query_str = """
     {
-      lmsTrips(first: 100, departureCode: ["ARN", "SFT", "UME", "LLA"], priceTo: 5000, tripTypes: [SPECIFIED, UNSPECIFIED]) {
+      lmsTrips(first: 100, departureCode: ["ARN", "SFT", "UME", "LLA"], priceTo: 9000, tripTypes: [SPECIFIED]) {
         edges {
           node {
             date {
@@ -294,14 +308,12 @@ def scrape_ving_lastminute():
             node = edge.get("node", {})
             offers = node.get("offers", [])
             for offer in offers:
-                # Vi vill endast ha paketresor (Specified och Unspecified), inte flightOnly
-                if offer["type"] not in ["specified", "unspecified"]:
+                # Vi vill endast ha specificerade paketresor, inte flightOnly eller unspecified
+                if offer["type"] != "specified":
                     continue
                     
                 price = float(offer["price"])
-                if price > 5000:
-                    continue
-                    
+                
                 departure_code = node.get("departureCode")
                 destination_code = node.get("destinationCode")
                 departure_date = node.get("date", {}).get("short")
@@ -316,7 +328,7 @@ def scrape_ving_lastminute():
                     return_date = departure_date
                     
                 hotel = node.get("hotel") or {}
-                hotel_name = "Ospecificerat boende"
+                hotel_name = "Specified boende"
                 country_name = "Okänt land"
                 resort_name = "Okänt resmål"
                 
@@ -343,9 +355,37 @@ def scrape_ving_lastminute():
                         # Fallback till själva IATA-koden om den inte finns i fallback-listan
                         if resort_name == "Okänt resmål":
                             resort_name = destination_code
+ 
+                # Hård filtrering: Inget ospecificerat boende tillåtet!
+                if "ospecificerat" in hotel_name.lower() or "unspecified" in hotel_name.lower() or hotel_name == "Specified boende":
+                    continue
 
-                if offer["type"] == "unspecified":
-                    hotel_name = "Ospecificerat boende"
+                # Matcha betyg mot vår lokala betygscache
+                rating = ratings_cache.get(hotel_name)
+                if rating is None:
+                    # Brand-fallback för kända Ving-premiumvarumärken
+                    name_lower = hotel_name.lower()
+                    if any(brand in name_lower for brand in ["sunprime", "sunwing", "ocean beach club", "o.b.c.", "casa cook"]):
+                        rating = 4.5
+                    else:
+                        rating = 0.0
+
+                # Logga okänt hotell till minnes-set (sparas efter loopen för att minimera disk-I/O)
+                if rating == 0.0:
+                    new_unknown_hotels.add(hotel_name)
+
+                # Kvalitetsspärr: Endast hotell med betyg >= 3.8
+                if rating < 3.8:
+                    continue
+
+                # Dynamisk prisspärr baserad på betyg för att tillåta lyxfynd
+                if rating >= 4.0:
+                    max_price = 9000
+                else: # rating mellan 3.8 och 4.0
+                    max_price = 6500
+
+                if price > max_price:
+                    continue
                 
                 # Bygg en sök-länk för sista-minuten som bypassar sessionskravet och 403
                 dep_date_clean = (node.get("date") or {}).get("raw", "").split("T")[0].replace("-", "")
@@ -365,7 +405,7 @@ def scrape_ving_lastminute():
                 departure_obj = node.get("departure") or {}
                 dep_id = departure_obj.get("caId", "-1")
                 
-                query_res_id = resort_ca_id if offer["type"] == "specified" else "-1"
+                query_res_id = resort_ca_id
                 
                 # Bygg en robust sista-minuten sök-länk som inte ger 403
                 serial_no = node.get('serialNumber') or '-1'
@@ -384,11 +424,26 @@ def scrape_ving_lastminute():
                     "flight_data": None,
                     "package_data": {
                         "hotel_name": hotel_name,
-                        "stars": None,
+                        "stars": rating,
                         "nights": duration,
+                        "resort_name": resort_name,
                         "operator": "Ving"
                     }
                 })
+        
+        # Spara alla okända hotell i en enda diskoppdatering (O(1) istället för O(N^2) I/O-slitage)
+        # Genom att skriva över filen ("w") med dagens skörd gör vi en automatisk Garbage Collection
+        # av spökhotell som operatören lagt till i hotel_ratings.json
+        if new_unknown_hotels:
+            unknown_file = "data/unknown_hotels.json"
+            try:
+                with open(unknown_file, "w", encoding="utf-8") as uf:
+                    json.dump(sorted(list(new_unknown_hotels)), uf, indent=2, ensure_ascii=False)
+            except Exception as e:
+                print(f"Kunde inte skriva till unknown_hotels: {e}")
+            
+            # Operatörs-larm till terminalloggen (inte Telegram) för att underlätta cacherensning
+            print(f"[VARNING] {len(new_unknown_hotels)} st okända Ving-hotell blockerades och har loggats i {unknown_file}")
         
         print(f"Hittade {len(parsed_packages)} st Ving-paket under tröskelvärdet!")
         return parsed_packages
@@ -438,7 +493,28 @@ def scrape_tui_lastminute():
                 continue
                 
             price = float(offer.get("pricePerPerson", {}).get("amount", 0))
-            if price > 5000:
+            
+            # Betyg och kvalitetsspärr: Endast hotell med betyg >= 3.8
+            stars = offer.get("hotel", {}).get("tuiRating")
+            try:
+                stars_val = float(stars) if stars is not None else 0.0
+            except Exception:
+                stars_val = 0.0
+
+            if stars_val < 3.8:
+                continue
+
+            hotel_name = offer.get("hotel", {}).get("name", "Ospecificerat boende")
+            if "ospecificerat" in hotel_name.lower() or "unspecified" in hotel_name.lower() or hotel_name == "Ospecificerat boende":
+                continue
+
+            # Dynamisk prisgräns baserat på betyg för att tillåta lyxfynd
+            if stars_val >= 4.0:
+                max_price = 9000
+            else: # stars_val mellan 3.8 och 4.0
+                max_price = 6500
+
+            if price > max_price:
                 continue
                 
             # Extrahera destination_code robust från flightInfo
@@ -468,7 +544,6 @@ def scrape_tui_lastminute():
             except Exception:
                 return_date = departure_date
                 
-            hotel_name = offer.get("hotel", {}).get("name", "Ospecificerat boende")
             stars = offer.get("hotel", {}).get("tuiRating")
             
             book_link = offer.get("bookLink", "")
@@ -489,6 +564,7 @@ def scrape_tui_lastminute():
                     "hotel_name": hotel_name,
                     "stars": stars,
                     "nights": duration,
+                    "resort_name": resort_name,
                     "operator": "TUI"
                 }
             })
@@ -557,6 +633,18 @@ def compute_deal_factor(item, history):
         nights = int(item.get("package_data", {}).get("nights", 7))
         if price / max(1, nights) < 500:
             tags.append("Under 500 kr/natt!")
+            
+    # Nivå 4: Lyxfynd (paketresor med hög rating och pris > 5000)
+    if item["type"] == "package":
+        stars = item.get("package_data", {}).get("stars")
+        try:
+            stars_val = float(stars) if stars is not None else 0.0
+        except Exception:
+            stars_val = 0.0
+            
+        if stars_val >= 4.0 and price > 5000:
+            display_stars = stars if stars is not None else stars_val
+            tags.append(f"⭐ Lyxfynd ({display_stars}★)")
             
     # Samla historiska priser för denna rutt (sorterat kronologiskt)
     route_prices = []
@@ -1495,11 +1583,26 @@ def generate_html_dashboard(state):
                         <span class="baggage-badge ${{bagClass}}">${{bagText}}</span>
                     `;
                 }} else {{
+                    let ratingHtml = '';
+                    if (f.package_data.stars) {{
+                        const resort = f.package_data.resort_name || f.destination_name.split(' (')[0];
+                        const searchQuery = encodeURIComponent(f.package_data.hotel_name + ' ' + resort);
+                        const taLink = `https://www.tripadvisor.se/Search?q=${{searchQuery}}`;
+                        ratingHtml = `
+                            <div class="detail-row">
+                                <span class="detail-label">TripAdvisor:</span>
+                                <a href="${{taLink}}" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 2px;">
+                                    ⭐ ${{parseFloat(f.package_data.stars).toFixed(1)}}★ <span style="font-size: 0.75rem; text-decoration: underline; color: var(--text-muted); font-weight: normal; margin-left: 2px;">(Kolla omdömen)</span>
+                                </a>
+                            </div>
+                        `;
+                    }}
                     detailsHtml = `
                         <div class="detail-row">
                             <span class="detail-label">Boende:</span>
                             <span class="detail-val" style="color: #fff; font-weight: 600;">${{f.package_data.hotel_name}}</span>
                         </div>
+                        ${{ratingHtml}}
                         <div class="detail-row">
                             <span class="detail-label">Reslängd:</span>
                             <span class="detail-val">${{f.package_data.nights}} dagar</span>
@@ -1602,7 +1705,20 @@ def run_groq_analysis(flights):
         price = float(f.get("price", 999999))
         if f.get("type") == "package":
             nights = max(1, int(f.get("package_data", {}).get("nights", 7)))
-            return price / nights
+            raw_score = price / nights
+            
+            # Applicera kvalitetsrabatt i kalkylen för att premiera lyxigare/bättre hotell
+            stars = f.get("package_data", {}).get("stars")
+            try:
+                stars_val = float(stars) if stars is not None else 0.0
+            except Exception:
+                stars_val = 0.0
+                
+            if stars_val >= 4.5:
+                return raw_score * 0.5  # 50% rabatt i värderingen
+            elif stars_val >= 4.0:
+                return raw_score * 0.6  # 40% rabatt i värderingen
+            return raw_score
         else:
             try:
                 dep = datetime.datetime.strptime(f["departure_date"], "%Y-%m-%d")

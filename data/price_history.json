@@ -13402,6 +13402,25 @@
             "nights": 15,
             "operator": "Ving"
           }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Cala Bona (Spanien)",
+          "price": 8705.0,
+          "departure_date": "2026-06-23",
+          "return_date": "2026-06-28",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260623&QueryDur=5&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=MIMO&QueryResID=441&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=21",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunwing Cala Bona Seafront",
+            "stars": 4.5,
+            "nights": 5,
+            "resort_name": "Cala Bona",
+            "operator": "Ving"
+          }
         }
       ]
     }
