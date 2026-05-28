@@ -487,6 +487,16 @@ def scrape_tui_lastminute():
         parsed_packages = []
         allowed_origins = ["ARN", "SFT", "UME", "LLA"]
         
+        # Läs in vår lokala betygscache (görs nu universell)
+        ratings_cache = {}
+        rating_file = "data/hotel_ratings.json"
+        if os.path.exists(rating_file):
+            try:
+                with open(rating_file, "r", encoding="utf-8") as rf:
+                    ratings_cache = json.load(rf)
+            except Exception as e:
+                print(f"Kunde inte läsa hotel_ratings.json för TUI: {e}")
+        
         for offer in offers:
             origin = offer.get("departureAirport", {}).get("code")
             if origin not in allowed_origins:
@@ -494,24 +504,33 @@ def scrape_tui_lastminute():
                 
             price = float(offer.get("pricePerPerson", {}).get("amount", 0))
             
-            # Betyg och kvalitetsspärr: Endast hotell med betyg >= 3.8
-            stars = offer.get("hotel", {}).get("tuiRating")
-            try:
-                stars_val = float(stars) if stars is not None else 0.0
-            except Exception:
-                stars_val = 0.0
-
-            if stars_val < 3.8:
-                continue
-
             hotel_name = offer.get("hotel", {}).get("name", "Ospecificerat boende")
             if "ospecificerat" in hotel_name.lower() or "unspecified" in hotel_name.lower() or hotel_name == "Ospecificerat boende":
                 continue
 
+            # Betyg och kvalitetsspärr:
+            # 1. Kolla universella betygscachen
+            # 2. Om ej i cache, använd tuiRating, men kräv >= 4.0 (TUI betygsinflation fallback)
+            stars = offer.get("hotel", {}).get("tuiRating")
+            try:
+                tui_rating_val = float(stars) if stars is not None else 0.0
+            except Exception:
+                tui_rating_val = 0.0
+
+            cached_rating = ratings_cache.get(hotel_name)
+            if cached_rating is not None:
+                stars_val = cached_rating
+                if stars_val < 3.8:
+                    continue
+            else:
+                stars_val = tui_rating_val
+                if stars_val < 4.0:
+                    continue
+
             # Dynamisk prisgräns baserat på betyg för att tillåta lyxfynd
             if stars_val >= 4.0:
                 max_price = 9000
-            else: # stars_val mellan 3.8 och 4.0
+            else: # stars_val mellan 3.8 och 4.0 (endast giltig via cache)
                 max_price = 6500
 
             if price > max_price:
@@ -544,8 +563,6 @@ def scrape_tui_lastminute():
             except Exception:
                 return_date = departure_date
                 
-            stars = offer.get("hotel", {}).get("tuiRating")
-            
             book_link = offer.get("bookLink", "")
             deep_link = f"https://www.tui.se{book_link}" if book_link else "https://www.tui.se"
             
@@ -562,7 +579,7 @@ def scrape_tui_lastminute():
                 "flight_data": None,
                 "package_data": {
                     "hotel_name": hotel_name,
-                    "stars": stars,
+                    "stars": stars_val,
                     "nights": duration,
                     "resort_name": resort_name,
                     "operator": "TUI"
@@ -1602,11 +1619,21 @@ def generate_html_dashboard(state):
                         const resort = f.package_data.resort_name || f.destination_name.split(' (')[0];
                         const searchQuery = encodeURIComponent(f.package_data.hotel_name + ' ' + resort);
                         const taLink = `https://www.tripadvisor.se/Search?q=${{searchQuery}}`;
+                        
+                        const isTui = f.package_data.operator === 'TUI';
+                        const labelText = isTui ? 'TUI Betyg:' : 'Betyg (Cache):';
+                        const starSymbol = isTui ? '📋' : '⭐';
+                        const ratingSuffix = isTui ? '/5' : '★';
+                        
                         ratingHtml = `
                             <div class="detail-row">
+                                <span class="detail-label">${{labelText}}</span>
+                                <span class="detail-val" style="color: #f59e0b; font-weight: 600;">${{starSymbol}} ${{parseFloat(f.package_data.stars).toFixed(1)}}${{ratingSuffix}}</span>
+                            </div>
+                            <div class="detail-row">
                                 <span class="detail-label">TripAdvisor:</span>
-                                <a href="${{taLink}}" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 2px;">
-                                    ⭐ ${{parseFloat(f.package_data.stars).toFixed(1)}}★ <span style="font-size: 0.75rem; text-decoration: underline; color: var(--text-muted); font-weight: normal; margin-left: 2px;">(Kolla omdömen)</span>
+                                <a href="${{taLink}}" target="_blank" rel="noopener noreferrer" style="color: #10b981; text-decoration: underline; font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                                    🔍 Sök omdömen
                                 </a>
                             </div>
                         `;
