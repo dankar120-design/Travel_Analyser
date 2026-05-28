@@ -872,6 +872,16 @@ def update_state(new_flights, new_packages=None):
 
 def generate_html_dashboard(state):
     """Genererar en premium och visuellt slående dashboard (index.html)."""
+    # Läs in blockerade hotell för att filtrera bort dem från dashboarden i realtid
+    unknown_hotels = set()
+    unknown_file = "data/unknown_hotels.json"
+    if os.path.exists(unknown_file):
+        try:
+            with open(unknown_file, "r", encoding="utf-8") as uf:
+                unknown_hotels = set(json.load(uf))
+        except Exception:
+            pass
+
     # Samla alla unika flyg och paket från de senaste dagarna till dashboarden
     all_items = {}
     
@@ -901,8 +911,12 @@ def generate_html_dashboard(state):
     else:
         cutoff_date = (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
     
-    # Filtrera på färskhet: visa endast resor som senast sågs vid senaste körningen eller dagen innan
-    items_list = [item for item in all_items.values() if item.get("last_seen_date", "") >= cutoff_date]
+    # Filtrera på färskhet och dölj blockerade okända hotell
+    items_list = [
+        item for item in all_items.values() 
+        if item.get("last_seen_date", "") >= cutoff_date 
+        and (item.get("package_data") or {}).get("hotel_name", "") not in unknown_hotels
+    ]
     
     # HTML-mall med modern glassmorphism styling och polymorfiska kort
     html_content = f"""<!DOCTYPE html>
