@@ -1068,6 +1068,9 @@ def generate_html_dashboard(state):
             font-family: inherit;
             font-size: 0.95rem;
             transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }}
 
         .filter-btn:hover {{
@@ -1079,6 +1082,30 @@ def generate_html_dashboard(state):
             background: var(--primary);
             border-color: var(--primary);
             box-shadow: 0 0 15px var(--primary-glow);
+        }}
+
+        .btn-count {{
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-color);
+        }}
+
+        .filter-btn.active .btn-count {{
+            background: rgba(255, 255, 255, 0.25);
+        }}
+
+        .results-summary {{
+            display: block;
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 0.95rem;
+            text-align: left;
+            color: var(--text-muted);
+            font-weight: 500;
         }}
 
         /* Flight Grid */
@@ -1476,6 +1503,8 @@ def generate_html_dashboard(state):
             </div>
         </section>
 
+        <div id="resultsSummary" class="results-summary"></div>
+
         <main class="flight-grid" id="flightGrid">
             <!-- Flygkort injectas via JavaScript -->
         </main>
@@ -1488,6 +1517,55 @@ def generate_html_dashboard(state):
         let activeSort = 'price';
         let showFavoritesOnly = false;
         let showHidden = false;
+
+        // Spara ursprungliga knapptexter för att förhindra DOM-läckor vid badge-rendering
+        document.querySelectorAll('.filter-btn').forEach(btn => {{
+            if (btn.dataset.type !== 'sort') {{
+                btn.dataset.label = btn.textContent;
+            }}
+        }});
+
+        function countMatches(tempFilters) {{
+            const favs = JSON.parse(localStorage.getItem('travel_favs') || '[]');
+            const hidden = JSON.parse(localStorage.getItem('travel_hidden') || '[]');
+            
+            const origin = tempFilters.origin !== undefined ? tempFilters.origin : activeOrigin;
+            const type = tempFilters.type !== undefined ? tempFilters.type : activeType;
+            const fav = tempFilters.fav !== undefined ? tempFilters.fav : showFavoritesOnly;
+            const hiddenFilter = tempFilters.hidden !== undefined ? tempFilters.hidden : showHidden;
+            
+            return flights.filter(f => {{
+                const matchOrigin = origin === 'ALL' || f.origin === origin;
+                const matchTypeVal = type === 'ALL' || f.type === type;
+                const matchHidden = hiddenFilter ? hidden.includes(f.id) : !hidden.includes(f.id);
+                const matchFav = fav ? favs.includes(f.id) : true;
+                
+                return matchOrigin && matchTypeVal && matchHidden && matchFav;
+            }}).length;
+        }}
+
+        function updateFilterCounts() {{
+            document.querySelectorAll('.filter-btn').forEach(btn => {{
+                const type = btn.dataset.type;
+                const val = btn.dataset.value;
+                
+                if (type === 'sort') return;
+                
+                let count = 0;
+                if (type === 'origin') {{
+                    count = countMatches({{ origin: val }});
+                }} else if (type === 'type') {{
+                    count = countMatches({{ type: val }});
+                }} else if (type === 'fav') {{
+                    count = countMatches({{ fav: !showFavoritesOnly }});
+                }} else if (type === 'hidden') {{
+                    count = countMatches({{ hidden: !showHidden }});
+                }}
+                
+                const label = btn.dataset.label || btn.textContent;
+                btn.innerHTML = `${{label}} <span class="btn-count">${{count}}</span>`;
+            }});
+        }}
 
         function toggleFav(id, event) {{
             event.preventDefault();
@@ -1551,6 +1629,13 @@ def generate_html_dashboard(state):
                 
                 return matchOrigin && matchType && matchHidden && matchFav;
             }});
+
+            const summaryDiv = document.getElementById('resultsSummary');
+            if (summaryDiv) {{
+                summaryDiv.textContent = `Visar ${{filtered.length}} av ${{flights.length}} unika fynd`;
+            }}
+
+            updateFilterCounts();
             
             if (filtered.length === 0) {{
                 grid.innerHTML = `
