@@ -13461,6 +13461,87 @@
           }
         }
       ]
+    },
+    {
+      "date": "2026-05-29",
+      "flights": [
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LPA",
+          "destination_name": "Playa del Inglés (Spanien)",
+          "price": 6190.0,
+          "departure_date": "2026-06-10",
+          "return_date": "2026-06-25",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LPA&QueryDepDate=20260610&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SUPR&QueryResID=227&QueryCtryID=65&QueryAreaID=108&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunprime Atlantic View",
+            "stars": 4.5,
+            "nights": 15,
+            "resort_name": "Playa del Inglés",
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Cala Bona (Spanien)",
+          "price": 8705.0,
+          "departure_date": "2026-06-23",
+          "return_date": "2026-06-28",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260623&QueryDur=5&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=MIMO&QueryResID=441&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=21",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunwing Cala Bona Seafront",
+            "stars": 4.5,
+            "nights": 5,
+            "resort_name": "Cala Bona",
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "tui",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "BOJ",
+          "destination_name": "Obzor (Bulgarien)",
+          "price": 3563.0,
+          "departure_date": "2026-06-01",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.tui.se/se/boka-resa?productCode=P-500000359&tab=overview&noOfAdults=2&noOfChildren=0&duration=7&airports%5B%5D=ARN&flexibility=false&when=01-06-2026&pkg=4697815971/3/516/7&tra_o=6997358272/7003590&tra_i=6997358476/7003591&units%5B%5D=P-500000359:HOTEL&multiSelect=true&index=1&brandType=S&dp=t&bb=SC&price=pp&rmpc=1|2|0|0|0|&rmtp=1BA01&rmbb=SC&fc=n&packageId=P-500000359BGBO009117802720000001780272000000BLX16117808768000001780963200000BLX1621BA014697815971/3/516/7",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Obzor Beach Resort",
+            "stars": 4.0,
+            "nights": 7,
+            "resort_name": "Obzor",
+            "operator": "TUI"
+          }
+        },
+        {
+          "source": "tui",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "BOJ",
+          "destination_name": "Sunny Beach (Bulgarien)",
+          "price": 4303.0,
+          "departure_date": "2026-06-01",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.tui.se/se/boka-resa?productCode=P-500000341&tab=overview&noOfAdults=2&noOfChildren=0&duration=7&airports%5B%5D=ARN&flexibility=false&when=01-06-2026&pkg=6854969441/3/516/7&tra_o=6997358272/7003590&tra_i=6997358476/7003591&units%5B%5D=P-500000341:HOTEL&multiSelect=true&index=1&brandType=S&dp=t&bb=BB&price=pp&rmpc=1|2|0|0|0|&rmtp=DD01&rmbb=BB&fc=n&packageId=P-500000341BGBO007317802720000001780272000000BLX16117808768000001780963200000BLX162DD016854969441/3/516/7",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Best Western PLUS Premium Inn",
+            "stars": 4.0,
+            "nights": 7,
+            "resort_name": "Sunny Beach",
+            "operator": "TUI"
+          }
+        }
+      ]
     }
   ]
 }
