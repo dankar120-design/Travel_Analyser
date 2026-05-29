@@ -13540,6 +13540,25 @@
             "resort_name": "Sunny Beach",
             "operator": "TUI"
           }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Cala Bona (Spanien)",
+          "price": 7345.0,
+          "departure_date": "2026-06-12",
+          "return_date": "2026-06-20",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260612&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=MIMO&QueryResID=441&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunwing Cala Bona Seafront",
+            "stars": 4.5,
+            "nights": 8,
+            "resort_name": "Cala Bona",
+            "operator": "Ving"
+          }
         }
       ]
     }

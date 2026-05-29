@@ -32,7 +32,9 @@ DESTINATIONS = {
     "ALC": "Alicante",
     "CHQ": "Chania",
     "LON": "London",
-    "FCO": "Rom"
+    "FCO": "Rom",
+    "ARN": "Stockholm",
+    "GDN": "Gdansk"
 }
 
 # Fallback-ordlista för charterdestinationer (IATA -> Stad, Land)
@@ -1448,6 +1450,84 @@ def generate_html_dashboard(state):
             max-width: 500px;
             margin: 0 auto;
         }}
+
+        /* Stockholmspendeln CSS */
+        .commuter-section {{
+            display: block;
+            margin-bottom: 2rem;
+            padding: 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }}
+        .commuter-title {{ 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            margin-bottom: 0.85rem; 
+            color: var(--text-color); 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }}
+        .commuter-grid {{ 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 12px; 
+        }}
+        .commuter-card {{
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }}
+        .commuter-card:hover {{
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--accent);
+        }}
+        .commuter-card summary {{
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 12px 16px; 
+            cursor: pointer; 
+            list-style: none;
+            user-select: none;
+        }}
+        .commuter-card summary::-webkit-details-marker {{ 
+            display: none; 
+        }}
+        .commuter-route {{ 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }}
+        .commuter-price {{ 
+            font-size: 1.05rem; 
+            font-weight: 700; 
+            color: var(--accent); 
+        }}
+        .commuter-details {{
+            padding: 0 16px 12px 16px; 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 0.85rem;
+        }}
+        .commuter-details td {{ 
+            padding: 6px 0; 
+            border-top: 1px solid rgba(255,255,255,0.05); 
+        }}
+        .commuter-details a {{ 
+            color: var(--accent); 
+            text-decoration: none; 
+            font-weight: 600; 
+        }}
+        .commuter-details a:hover {{
+            text-decoration: underline;
+        }}
     </style>
 </head>
 <body>
@@ -1470,6 +1550,14 @@ def generate_html_dashboard(state):
             </div>
         </div>
 
+        <!-- Lokala Direktflyg Widget Container -->
+        <section class="commuter-section" id="commuterSection" style="display: none;">
+            <div class="commuter-title">✈️ Lokala Direktflyg (Stockholm & Gdansk)</div>
+            <div class="commuter-grid" id="commuterGrid">
+                <!-- Fylls dynamiskt av JS -->
+            </div>
+        </section>
+
         <section class="filter-section">
             <div class="filter-title">Filter & Sortering</div>
             
@@ -1491,7 +1579,8 @@ def generate_html_dashboard(state):
 
             <div class="filter-row-secondary">
                 <div style="font-size: 0.85rem; color: var(--text-muted); width: 100%;">Sortering:</div>
-                <button class="filter-btn active" data-type="sort" data-value="price" onclick="setFilter('sort', 'price')">💰 Pris</button>
+                <button class="filter-btn active" data-type="sort" data-value="deal" onclick="setFilter('sort', 'deal')">🔥 Bästa fynd</button>
+                <button class="filter-btn" data-type="sort" data-value="price" onclick="setFilter('sort', 'price')">💰 Pris</button>
                 <button class="filter-btn" data-type="sort" data-value="date" onclick="setFilter('sort', 'date')">📅 Datum</button>
                 <button class="filter-btn" data-type="sort" data-value="duration" onclick="setFilter('sort', 'duration')">⏳ Längd</button>
             </div>
@@ -1514,9 +1603,32 @@ def generate_html_dashboard(state):
         const flights = {json.dumps(items_list, ensure_ascii=False)};
         let activeOrigin = 'ALL';
         let activeType = 'ALL';
-        let activeSort = 'price';
+        let activeSort = 'deal';
         let showFavoritesOnly = false;
         let showHidden = false;
+
+        // Beräkna global max pris en gång för semesterresor (exklusive lokala direktflyg)
+        const vacationFlights = flights.filter(f => !['ARN', 'GDN'].includes(f.destination));
+        const GLOBAL_MAX_PRICE = Math.max(...vacationFlights.map(f => f.price || 0), 1);
+
+        // Beräkna Deal Score för att rangordna "Bästa fynd"
+        function getDealScore(f) {{
+            const price = f.price || Infinity;
+            const basePriceScore = price === Infinity ? -9999 : ((GLOBAL_MAX_PRICE - price) / GLOBAL_MAX_PRICE) * 100;
+            
+            let starPremium = 0;
+            if (f.type === 'package' && f.package_data && f.package_data.stars) {{
+                const stars = parseFloat(f.package_data.stars) || 0;
+                starPremium = Math.pow(Math.max(0, stars - 3.7), 2) * 80;
+            }}
+            
+            let tagBonus = 0;
+            if (f.tags && Array.isArray(f.tags)) {{
+                tagBonus = f.tags.length * 15;
+            }}
+            
+            return basePriceScore + starPremium + tagBonus;
+        }}
 
         // Spara ursprungliga knapptexter för att förhindra DOM-läckor vid badge-rendering
         document.querySelectorAll('.filter-btn').forEach(btn => {{
@@ -1534,7 +1646,7 @@ def generate_html_dashboard(state):
             const fav = tempFilters.fav !== undefined ? tempFilters.fav : showFavoritesOnly;
             const hiddenFilter = tempFilters.hidden !== undefined ? tempFilters.hidden : showHidden;
             
-            return flights.filter(f => {{
+            return vacationFlights.filter(f => {{
                 const matchOrigin = origin === 'ALL' || f.origin === origin;
                 const matchTypeVal = type === 'ALL' || f.type === type;
                 const matchHidden = hiddenFilter ? hidden.includes(f.id) : !hidden.includes(f.id);
@@ -1621,7 +1733,7 @@ def generate_html_dashboard(state):
             const favs = JSON.parse(localStorage.getItem('travel_favs') || '[]');
             const hidden = JSON.parse(localStorage.getItem('travel_hidden') || '[]');
             
-            let filtered = flights.filter(f => {{
+            let filtered = vacationFlights.filter(f => {{
                 const matchOrigin = activeOrigin === 'ALL' || f.origin === activeOrigin;
                 const matchType = activeType === 'ALL' || f.type === activeType;
                 const matchHidden = showHidden ? hidden.includes(f.id) : !hidden.includes(f.id);
@@ -1632,7 +1744,7 @@ def generate_html_dashboard(state):
 
             const summaryDiv = document.getElementById('resultsSummary');
             if (summaryDiv) {{
-                summaryDiv.textContent = `Visar ${{filtered.length}} av ${{flights.length}} unika fynd`;
+                summaryDiv.textContent = `Visar ${{filtered.length}} av ${{vacationFlights.length}} unika fynd`;
             }}
 
             updateFilterCounts();
@@ -1649,6 +1761,7 @@ def generate_html_dashboard(state):
 
             // Sortering
             filtered.sort((a, b) => {{
+                if (activeSort === 'deal') return getDealScore(b) - getDealScore(a);
                 if (activeSort === 'price') return a.price - b.price;
                 if (activeSort === 'date') return new Date(a.departure_date) - new Date(b.departure_date);
                 if (activeSort === 'duration') {{
@@ -1819,8 +1932,101 @@ def generate_html_dashboard(state):
                 grid.appendChild(card);
             }});
         }}
+        function renderCommuterWidget() {{
+            const container = document.getElementById('commuterSection');
+            const grid = document.getElementById('commuterGrid');
+            if (!container || !grid) return;
+
+            const commuterFlights = flights.filter(f => ['ARN', 'GDN'].includes(f.destination) && f.type === 'flight');
+            if (commuterFlights.length === 0) {{
+                container.style.display = 'none';
+                return;
+            }}
+
+            container.style.display = 'block';
+            grid.innerHTML = '';
+
+            // Gruppera efter rutt (origin -> destination)
+            const routesMap = {{}};
+            commuterFlights.forEach(f => {{
+                const key = `${{f.origin}}-${{f.destination}}`;
+                if (!routesMap[key]) {{
+                    routesMap[key] = {{
+                        origin: f.origin,
+                        destination: f.destination,
+                        destinationName: f.destination_name || f.destination,
+                        flights: []
+                    }};
+                }}
+                routesMap[key].flights.push(f);
+            }});
+
+            const uniqueRoutes = Object.values(routesMap).sort((a, b) => {{
+                if (a.origin !== b.origin) {{
+                    return a.origin.localeCompare(b.origin);
+                }}
+                return a.destination.localeCompare(b.destination);
+            }});
+
+            uniqueRoutes.forEach(route => {{
+                const origFlights = route.flights;
+                if (origFlights.length === 0) return;
+
+                // Sortera efter pris stigande
+                origFlights.sort((a, b) => a.price - b.price);
+
+                const cheapest = origFlights[0];
+                const cheapestPrice = Math.round(cheapest.price).toLocaleString('sv-SE');
+
+                // Skapa details-element för rutten
+                const detailsEl = document.createElement('details');
+                detailsEl.className = 'commuter-card';
+
+                // Fyll på options, max 5 st
+                const topOptions = origFlights.slice(0, 5);
+                let rowsHtml = '';
+                topOptions.forEach(opt => {{
+                    const priceFormatted = Math.round(opt.price).toLocaleString('sv-SE');
+                    const carrier = opt.flight_data && opt.flight_data.carrier ? opt.flight_data.carrier : 'Flygbolag';
+                    const stopsOut = opt.flight_data ? opt.flight_data.outbound_stops : 0;
+                    const stopsIn = opt.flight_data ? opt.flight_data.inbound_stops : 0;
+                    const stopsText = (stopsOut === 0 && stopsIn === 0) ? 'Direktflyg' : `Byten: ${{opt.flight_data.outbound_stops}}/${{opt.flight_data.inbound_stops}}`;
+                    
+                    rowsHtml += `
+                        <tr>
+                            <td style="font-weight: 600; color: var(--text-color);">${{opt.departure_date}} till ${{opt.return_date}}</td>
+                            <td style="color: var(--text-muted);">${{carrier}} (${{stopsText}})</td>
+                            <td style="text-align: right; font-weight: 700; color: var(--accent);">${{priceFormatted}} kr</td>
+                            <td style="text-align: right; padding-left: 8px;">
+                                <a href="${{opt.deep_link}}" target="_blank" rel="noopener noreferrer">Boka ➔</a>
+                            </td>
+                        </tr>
+                    `;
+                }});
+
+                detailsEl.innerHTML = `
+                    <summary>
+                        <div class="commuter-route">
+                            <span>✈️</span>
+                            <strong>${{route.origin}} ➔ ${{route.destinationName}}</strong>
+                        </div>
+                        <div class="commuter-price">fr. ${{cheapestPrice}} kr</div>
+                    </summary>
+                    <div style="padding: 0 16px 12px 16px; overflow-x: auto;">
+                        <table class="commuter-details">
+                            <tbody>
+                                ${{rowsHtml}}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+
+                grid.appendChild(detailsEl);
+            }});
+        }}
 
         // Initial rendering
+        renderCommuterWidget();
         renderFlights();
     </script>
 </body>
@@ -2057,6 +2263,8 @@ def main():
         # 3. Sök igenom flyg (Matris loop)
         for origin in origins:
             for dest in DESTINATIONS.keys():
+                if origin == dest:
+                    continue
                 # Begränsa antalet datum i Sandbox för att inte få 429
                 # Vi söker de 6 närmsta helgerna för normal skanning, och alla om det är --deep
                 dates_to_search = search_dates if (is_deep or len(origins) == 1) else search_dates[:6]
