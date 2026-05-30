@@ -13561,6 +13561,457 @@
           }
         }
       ]
+    },
+    {
+      "date": "2026-05-30",
+      "flights": [
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "AGP",
+          "destination_name": "Malaga",
+          "price": 1915.0,
+          "departure_date": "2026-06-06",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/agp/260606/260606?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Tickets",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "AGP",
+          "destination_name": "Malaga",
+          "price": 1984.0,
+          "departure_date": "2026-06-08",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/agp/260608/260608?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 2,
+            "inbound_stops": 2,
+            "carrier": "Flightnetwork",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "AGP",
+          "destination_name": "Malaga",
+          "price": 2026.0,
+          "departure_date": "2026-06-07",
+          "return_date": "2026-06-07",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/agp/260607/260607?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 2,
+            "inbound_stops": 2,
+            "carrier": "Flightnetwork",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "AGP",
+          "destination_name": "Malaga",
+          "price": 2256.0,
+          "departure_date": "2026-06-20",
+          "return_date": "2026-06-20",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/agp/260620/260620?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 2,
+            "inbound_stops": 2,
+            "carrier": "Tickets",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "AGP",
+          "destination_name": "Malaga",
+          "price": 3498.0,
+          "departure_date": "2026-07-11",
+          "return_date": "2026-07-11",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/agp/260711/260711?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 2,
+            "inbound_stops": 2,
+            "carrier": "Tickets",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "ALC",
+          "destination_name": "Alicante",
+          "price": 1439.0,
+          "departure_date": "2026-06-04",
+          "return_date": "2026-06-04",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/alc/260604/260604?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Mytrip.com",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "ALC",
+          "destination_name": "Alicante",
+          "price": 1568.0,
+          "departure_date": "2026-06-02",
+          "return_date": "2026-06-02",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/alc/260602/260602?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Kiwi.com",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "ALC",
+          "destination_name": "Alicante",
+          "price": 1786.0,
+          "departure_date": "2026-06-08",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/alc/260608/260608?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 2,
+            "inbound_stops": 2,
+            "carrier": "Mytrip.com",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "ALC",
+          "destination_name": "Alicante",
+          "price": 1892.0,
+          "departure_date": "2026-06-05",
+          "return_date": "2026-06-05",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/alc/260605/260605?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Kiwi.com",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "ALC",
+          "destination_name": "Alicante",
+          "price": 2073.0,
+          "departure_date": "2026-06-06",
+          "return_date": "2026-06-06",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/alc/260606/260606?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Vayama",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "LON",
+          "destination_name": "London",
+          "price": 943.0,
+          "departure_date": "2026-06-09",
+          "return_date": "2026-06-09",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/lon/260609/260609?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Mytrip.com",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "LON",
+          "destination_name": "London",
+          "price": 1192.0,
+          "departure_date": "2026-06-10",
+          "return_date": "2026-06-10",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/lon/260610/260610?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Flightnetwork",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "LON",
+          "destination_name": "London",
+          "price": 1495.0,
+          "departure_date": "2026-07-21",
+          "return_date": "2026-07-21",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/lon/260721/260721?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 1,
+            "inbound_stops": 1,
+            "carrier": "Flightnetwork",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "travelpayouts",
+          "type": "flight",
+          "origin": "ARN",
+          "destination": "GDN",
+          "destination_name": "Gdansk",
+          "price": 684.0,
+          "departure_date": "2026-07-21",
+          "return_date": "2026-07-21",
+          "deep_link": "https://www.skyscanner.se/transport/flights/arn/gdn/260721/260721?adults=1",
+          "flight_data": {
+            "departure_time": "--:--",
+            "arrival_time": "--:--",
+            "return_time": "--:--",
+            "outbound_stops": 0,
+            "inbound_stops": 0,
+            "carrier": "Kiwi.com",
+            "baggage_included": false
+          },
+          "package_data": null
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LPA",
+          "destination_name": "Playa del Inglés (Spanien)",
+          "price": 6190.0,
+          "departure_date": "2026-06-10",
+          "return_date": "2026-06-25",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=LPA&QueryDepDate=20260610&QueryDur=15&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=SUPR&QueryResID=227&QueryCtryID=65&QueryAreaID=108&QueryDepID=2788&SelectedSerNo=31",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunprime Atlantic View",
+            "stars": 4.5,
+            "nights": 15,
+            "resort_name": "Playa del Inglés",
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Cala Bona (Spanien)",
+          "price": 7345.0,
+          "departure_date": "2026-06-12",
+          "return_date": "2026-06-20",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260612&QueryDur=8&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=MIMO&QueryResID=441&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=51",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunwing Cala Bona Seafront",
+            "stars": 4.5,
+            "nights": 8,
+            "resort_name": "Cala Bona",
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "ving",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "PMI",
+          "destination_name": "Cala Bona (Spanien)",
+          "price": 8705.0,
+          "departure_date": "2026-06-23",
+          "return_date": "2026-06-28",
+          "deep_link": "https://www.ving.se/sista-minuten?SelectedDepCd=ARN&SelectedDestCd=PMI&QueryDepDate=20260623&QueryDur=5&QueryRoomAges=42&QueryUnits=1&SelectedHotCd=MIMO&QueryResID=441&QueryCtryID=65&QueryAreaID=127&QueryDepID=2788&SelectedSerNo=21",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Sunwing Cala Bona Seafront",
+            "stars": 4.5,
+            "nights": 5,
+            "resort_name": "Cala Bona",
+            "operator": "Ving"
+          }
+        },
+        {
+          "source": "tui",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "BOJ",
+          "destination_name": "Sunny Beach (Bulgarien)",
+          "price": 3303.0,
+          "departure_date": "2026-06-01",
+          "return_date": "2026-06-08",
+          "deep_link": "https://www.tui.se/se/boka-resa?productCode=P-500000341&tab=overview&noOfAdults=2&noOfChildren=0&duration=7&airports%5B%5D=ARN&flexibility=false&when=01-06-2026&pkg=6854969441/3/516/7&tra_o=6997358272/7003590&tra_i=6997358476/7003591&units%5B%5D=P-500000341:HOTEL&multiSelect=true&index=1&brandType=S&dp=t&bb=BB&price=pp&rmpc=1|2|0|0|0|&rmtp=DD01&rmbb=BB&fc=n&packageId=P-500000341BGBO007317802720000001780272000000BLX16117808768000001780963200000BLX162DD016854969441/3/516/7",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Best Western PLUS Premium Inn",
+            "stars": 4.0,
+            "nights": 7,
+            "resort_name": "Sunny Beach",
+            "operator": "TUI"
+          }
+        },
+        {
+          "source": "tui",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "SPU",
+          "destination_name": "Podgora (Kroatien)",
+          "price": 3999.0,
+          "departure_date": "2026-06-05",
+          "return_date": "2026-06-12",
+          "deep_link": "https://www.tui.se/se/boka-resa?productCode=P-000143147&tab=overview&noOfAdults=2&noOfChildren=0&duration=7&airports%5B%5D=ARN&flexibility=false&when=05-06-2026&pkg=1094404205/3/520/7&tra_o=6997354233/7006374&tra_i=6997354437/7006375&units%5B%5D=P-000143147:HOTEL&multiSelect=true&index=1&brandType=S&dp=t&bb=BB&price=pp&rmpc=1|2|0|0|0|&rmtp=DD01&rmbb=BB&fc=n&packageId=P-000143147HRDL002317806176000001780617600000BLX17317812224000001781222400000BLX174DD011094404205/3/520/7",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "BLUE STAR Medora Auri",
+            "stars": 4.0,
+            "nights": 7,
+            "resort_name": "Podgora",
+            "operator": "TUI"
+          }
+        },
+        {
+          "source": "tui",
+          "type": "package",
+          "origin": "UME",
+          "destination": "CHQ",
+          "destination_name": "Agia Marina (Grekland)",
+          "price": 4457.0,
+          "departure_date": "2026-06-05",
+          "return_date": "2026-06-12",
+          "deep_link": "https://www.tui.se/se/boka-resa?productCode=P-000008371&tab=overview&noOfAdults=2&noOfChildren=0&duration=7&airports%5B%5D=UME&flexibility=false&when=05-06-2026&pkg=1084794704/3/520/7&tra_o=7262673027/7084142&tra_i=7262673090/7084143&units%5B%5D=P-000008371:HOTEL&multiSelect=true&index=1&brandType=S&dp=t&bb=SC&price=pp&rmpc=1|2|0|0|0|&rmtp=ST03&rmbb=SC&fc=n&packageId=P-000008371GRCQ003417806176000001780617600000A3457117812224000001781222400000A34570ST031084794704/3/520/7",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "BLUE STAR Isida Village",
+            "stars": 4.0,
+            "nights": 7,
+            "resort_name": "Agia Marina",
+            "operator": "TUI"
+          }
+        },
+        {
+          "source": "tui",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Ayia Napa (Cypern)",
+          "price": 4731.0,
+          "departure_date": "2026-06-03",
+          "return_date": "2026-06-10",
+          "deep_link": "https://www.tui.se/se/boka-resa?productCode=P-000003618&tab=overview&noOfAdults=2&noOfChildren=0&duration=7&airports%5B%5D=ARN&flexibility=false&when=03-06-2026&pkg=1112377657/3/518/7&tra_o=6999017491/7009563&tra_i=6999017695/7009564&units%5B%5D=P-000003618:HOTEL&multiSelect=true&index=1&brandType=S&dp=t&bb=BB&price=pp&rmpc=1|2|0|0|0|&rmtp=TW01&rmbb=BB&fc=n&packageId=P-000003618CYLN001117804448000001780444800000BLX27317810496000001781136000000BLX274TW011112377657/3/518/7",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Melpo-Antia",
+            "stars": 4.0,
+            "nights": 7,
+            "resort_name": "Ayia Napa",
+            "operator": "TUI"
+          }
+        },
+        {
+          "source": "tui",
+          "type": "package",
+          "origin": "ARN",
+          "destination": "LCA",
+          "destination_name": "Ayia Napa (Cypern)",
+          "price": 4766.0,
+          "departure_date": "2026-06-03",
+          "return_date": "2026-06-10",
+          "deep_link": "https://www.tui.se/se/boka-resa?productCode=P-000243494&tab=overview&noOfAdults=2&noOfChildren=0&duration=7&airports%5B%5D=ARN&flexibility=false&when=03-06-2026&pkg=1094326667/3/518/7&tra_o=6999017491/7009563&tra_i=6999017695/7009564&units%5B%5D=P-000243494:HOTEL&multiSelect=true&index=1&brandType=S&dp=t&bb=BB&price=pp&rmpc=1|2|0|0|0|&rmtp=TW01&rmbb=BB&fc=n&packageId=P-000243494CYLN010117804448000001780444800000BLX27317810496000001781136000000BLX274TW011094326667/3/518/7",
+          "flight_data": null,
+          "package_data": {
+            "hotel_name": "Tasia Maris Seasons Hotel",
+            "stars": 4.0,
+            "nights": 7,
+            "resort_name": "Ayia Napa",
+            "operator": "TUI"
+          }
+        }
+      ]
     }
   ]
 }
